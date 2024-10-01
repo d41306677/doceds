@@ -36,8 +36,14 @@ async function fetchData(block) {
 }
 
 function displayImage(imageUrl) {
-    const imageContainer = document.querySelector('.apirandompicture');
+if(!imageUrl) {
+  console.log("image url is not available")
+  return;
+}
+  const imageContainer = document.querySelector('.apirandompicture');
+  imageContainer.innerHTML = "";
     const picture = document.createElement('picture');
+  
 
     // Creating image sources
     const sourceWebP = document.createElement('source');
@@ -59,6 +65,5 @@ function displayImage(imageUrl) {
     picture.appendChild(img);
 
     // Append picture to the image container
-  imageContainer.innerHTML = "HTML API Block"
     imageContainer.appendChild(picture);
 }
