@@ -30,7 +30,7 @@ export default async function decorates(block) {
 
 
 async function fetchData(block) {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1').then(res => res.clone().json())
-    block.append(response.title);
+    const response = await fetch('https://dog.ceo/api/breeds/image/random').then(res => res.clone().json())
+    block.append(response.message);
     console.log(response);
 }
