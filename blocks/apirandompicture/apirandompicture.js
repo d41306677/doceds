@@ -36,7 +36,7 @@ async function fetchData(block) {
 }
 
 function displayImage(imageUrl) {
-    const imageContainer = document.getElementById('image-container');
+    const imageContainer = document.querySelector('.apirandompicture-container');
     const picture = document.createElement('picture');
 
     // Creating image sources
@@ -61,4 +61,3 @@ function displayImage(imageUrl) {
     // Append picture to the image container
     imageContainer.appendChild(picture);
 }
-
