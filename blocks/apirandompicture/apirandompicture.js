@@ -59,5 +59,6 @@ function displayImage(imageUrl) {
     picture.appendChild(img);
 
     // Append picture to the image container
+  imageContainer.innerHTML = "HTML API Block"
     imageContainer.appendChild(picture);
 }
