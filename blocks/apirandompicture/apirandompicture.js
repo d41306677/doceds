@@ -31,7 +31,7 @@ export default async function decorates(block) {
 
 async function fetchData(block) {
     const response = await fetch('https://dog.ceo/api/breeds/image/random').then(res => res.clone().json())
-    block.append(displayImage(response.message));
+    await block.append(displayImage(response.message));
     console.log(response);
 }
 
