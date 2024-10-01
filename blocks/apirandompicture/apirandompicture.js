@@ -37,7 +37,7 @@ async function fetchData(block) {
 
 function displayImage(imageUrl) {
 const imageContainer = document.getElementById('image-container');
-constpicture = document.createElement('picture');
+const picture = document.createElement('picture');
 
 // Creating image sources
 const sourceWebP = document.createElement('source');
