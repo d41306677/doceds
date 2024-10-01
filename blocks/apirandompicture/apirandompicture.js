@@ -36,25 +36,29 @@ async function fetchData(block) {
 }
 
 function displayImage(imageUrl) {
-const imageContainer = document.getElementById('image-container');
-const picture = document.createElement('picture');
+    const imageContainer = document.getElementById('image-container');
+    const picture = document.createElement('picture');
 
-// Creating image sources
-const sourceWebP = document.createElement('source');
-            sourceWebP.srcset = imageUrl;
-            sourceWebP.type ='image/webp';
+    // Creating image sources
+    const sourceWebP = document.createElement('source');
+    sourceWebP.srcset = imageUrl;
+    sourceWebP.type = 'image/webp';
 
-const sourceJpeg = document.createElement('source');
-            sourceJpeg.srcset = imageUrl;
-            sourceJpeg.type ='image/jpeg';
+    const sourceJpeg = document.createElement('source');
+    sourceJpeg.srcset = imageUrl;
+    sourceJpeg.type = 'image/jpeg';
 
-const img = document.createElement('img');
-            img.src = imageUrl;
-            img.alt ='Random Dog';
-            img.style.width ='300px';
-// Adjust width// Append sources and img to picture tag
-            picture.appendChild(sourceWebP);
-            picture.appendChild(sourceJpeg);
-            picture.appendChild(img);
+    const img = document.createElement('img');
+    img.src = imageUrl; // Default fallback
+    img.alt = 'Random Dog';
+    img.style.width = '300px';
 
+    // Append sources and img to picture tag
+    picture.appendChild(sourceWebP);
+    picture.appendChild(sourceJpeg);
+    picture.appendChild(img);
+
+    // Append picture to the image container
+    imageContainer.appendChild(picture);
 }
+
