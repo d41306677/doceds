@@ -41,6 +41,7 @@ if(!imageUrl) {
   return;
 }
   const imageContainer = document.querySelector('.apirandompicture');
+  console.log(imageContainer)
   imageContainer.innerHTML = "";
     const picture = document.createElement('picture');
   
