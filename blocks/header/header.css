@@ -97,14 +97,25 @@ header nav .nav-sections ul > li > ul {
 header nav .nav-sections ul > li > ul {
   display: none;
   position: absolute;
+  top: 100%; /* Ensure it appears below the parent li */
+  left: 0;
+  z-index: 1; /* Ensure it appears above other content */
+  background-color: black; /* Set the background color of the dropdown */
+  padding: 10px 0; /* Add some padding around the dropdown items */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add shadow for better visibility */
 }
 
 header nav .nav-sections ul > li:hover > ul {
   display: block;
-  top: 100%;
-  left: 0;
+
+}
+header nav .nav-sections ul > li > ul li {
+  padding: 10px 20px; /* Add padding for submenu items */
 }
 
+header nav .nav-sections ul > li > ul li:hover {
+  background-color: rgba(255, 255, 0, 0.1); /* Highlight effect for submenu items */
+}
 @media (width >= 900px) {
   header nav .nav-hamburger {
     display: none;
