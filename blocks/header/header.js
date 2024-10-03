@@ -176,7 +176,7 @@ const newImage = document.createElement('img');
 newImage.className ="logo"
 newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
 newImage.alt = 'DeVry University Logo';
-newImage.style.width = '100px'; // Adjust the width as per your needs
+newImage.style.width = '240px'; // Adjust the width as per your needs
  
 // Append the p and img elements to the div
 newDiv.appendChild(newImage);
