@@ -1,6 +1,6 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: #000000;
   width: 100%;
   z-index: 2;
   position: fixed;
@@ -15,6 +15,7 @@ header nav {
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
+  color: #ffffff; 
 }
 
 header nav p {
@@ -39,7 +40,12 @@ header nav .nav-brand img {
   width: 128px;
   height: auto;
 }
-
+@media (min-width: 1280px) {
+  header nav .nav-brand img {
+    width: 204px; /* Increase logo size on larger screens */
+    height: 24px; /* Set logo height */
+  }
+}
 /* sections */
 header nav .nav-sections {
   flex: 1;
