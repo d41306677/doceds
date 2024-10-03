@@ -163,4 +163,29 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // Select the target element you want to replace
+const targetElement = document.querySelector('.default-content-wrapper');
+ 
+// Create a new div element
+const newDiv = document.createElement('div');
+newDiv.className = 'default-content-wrapper';
+ 
+// Create a new img element for the SVG
+const newImage = document.createElement('img');
+newImage.className ="logo"
+newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
+newImage.alt = 'DeVry University Logo';
+newImage.style.width = '100px'; // Adjust the width as per your needs
+ 
+// Append the p and img elements to the div
+newDiv.appendChild(newImage);
+ 
+// Replace the old content with the new div
+if (targetElement) {
+    targetElement.replaceWith(newDiv);
+}
+}
+
+  
 }
