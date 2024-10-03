@@ -74,6 +74,8 @@ header nav .nav-sections ul > li {
   font-style: normal;
   display: flex;
   color: hsla(0,0%,100%,.8);
+  text-transform: none;
+  cursor:pointer;
 }
 
 /* Hover effect with yellow underline for li items */
