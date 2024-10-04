@@ -210,17 +210,30 @@ export default async function decorate(block) {
 
 // Add DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', function () {
-  // Get all menu items that have submenus
-  const menuItems = document.querySelectorAll('.menu-item[aria-expanded]');
+  const menuItems = document.querySelectorAll('header nav .nav-sections ul > li');
 
   menuItems.forEach(item => {
-    // Set aria-expanded to false on page load
-    item.setAttribute('aria-expanded', 'false');
+    item.addEventListener('mouseenter', function() {
+      const submenu = this.querySelector('ul');
+      if (submenu) {
+        submenu.style.display = 'block'; // Show submenu on hover
+      }
+    });
 
-    // Hide the submenu
-    const submenu = item.nextElementSibling;
-    if (submenu && submenu.classList.contains('submenu')) {
-      submenu.style.display = 'none';
-    }
+    item.addEventListener('mouseleave', function() {
+      const submenu = this.querySelector('ul');
+      if (submenu) {
+        submenu.style.display = 'none'; // Hide submenu when not hovering
+      }
+    });
+
+    // Optionally, toggle submenu on click for mobile
+    item.addEventListener('click', function() {
+      const submenu = this.querySelector('ul');
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !isExpanded);
+      submenu.style.display = isExpanded ? 'none' : 'block'; // Toggle submenu visibility
+    });
   });
 });
+
