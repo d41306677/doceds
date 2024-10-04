@@ -80,36 +80,28 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
   // Enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
-if (isDesktop.matches) {
-  navDrops.forEach((drop) => {
-    if (!drop.hasAttribute('tabindex')) {
-      drop.setAttribute('tabindex', 0);
-      drop.addEventListener('focus', focusNavSection);
-    }
-    drop.addEventListener('click', () => {
-      const dropExpanded = drop.getAttribute('aria-expanded') === 'true';
-      toggleAllNavSections(navSections);
-      drop.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-      const submenu = drop.querySelector('.submenu');
-      if (submenu) {
-        submenu.style.display = dropExpanded ? 'none' : 'block';
+  if (isDesktop.matches) {
+    navDrops.forEach((drop) => {
+      if (!drop.hasAttribute('tabindex')) {
+        drop.setAttribute('tabindex', 0);
+        drop.addEventListener('focus', focusNavSection);
       }
+      drop.addEventListener('click', () => {
+        const dropExpanded = drop.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        drop.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
+        const submenu = drop.querySelector('.submenu');
+        if (submenu) {
+          submenu.style.display = dropExpanded ? 'none' : 'block';
+        }
+      });
     });
-
-    // Added handling for keyboard navigation
-    drop.addEventListener('keydown', (e) => {
-      if (e.code === 'Enter' || e.code === 'Space') {
-        e.preventDefault(); // Prevent the default action (e.g., scrolling)
-        drop.click(); // Simulate a click on the dropdown
-      }
+  } else {
+    navDrops.forEach((drop) => {
+      drop.removeAttribute('tabindex');
+      drop.removeEventListener('focus', focusNavSection);
     });
-  });
-} else {
-  navDrops.forEach((drop) => {
-    drop.removeAttribute('tabindex');
-    drop.removeEventListener('focus', focusNavSection);
-  });
-}
+  }
 
   // Manage keyboard accessibility
   if (!expanded || isDesktop.matches) {
