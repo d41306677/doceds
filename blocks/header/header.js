@@ -186,3 +186,8 @@ if (targetElement) {
     targetElement.replaceWith(newDiv);
 } 
 }
+// Add DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+  const block = document.querySelector('.header-block'); // Ensure to replace this with your actual header block selector
+  decorate(block);
+});
