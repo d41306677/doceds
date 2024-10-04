@@ -121,15 +121,11 @@ header nav .nav-sections ul > li > ul li:hover {
 /* Mobile Styles */
 header nav .nav-hamburger {
   display: none; /* Initially hide hamburger menu */
-  font-size: 30px; /* Size for hamburger icon */
-  color: #ffffff;
 }
 
 @media (max-width: 767px) {
-  header nav .nav-hamburger {
-    display: block; /* Show hamburger on mobile */
-    cursor: pointer;
-    margin-left: auto; /* Ensure it's on the right side */
+  header nav {
+    justify-content: space-between; /* Ensure space between elements */
   }
 
   header nav .nav-sections {
@@ -145,6 +141,18 @@ header nav .nav-hamburger {
 
   header nav .nav-sections.active {
     display: flex; /* Show on toggle */
+  }
+
+  header nav .nav-hamburger {
+    display: block; /* Show hamburger on mobile */
+    cursor: pointer;
+    order: 2; /* Ensure hamburger is on the right side */
+  }
+
+  header nav .search-container {
+    flex-grow: 1; /* Push hamburger to the right */
+    display: flex;
+    justify-content: flex-end;
   }
 
   header nav .nav-sections ul {
