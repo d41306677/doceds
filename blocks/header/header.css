@@ -154,7 +154,7 @@ header nav .nav-hamburger {
 
   /* Show when active */
   header nav .nav-sections.active {
-    display: flex;
+    /*  display: flex;*/
   }
 
   header nav .nav-sections ul {
