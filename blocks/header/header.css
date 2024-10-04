@@ -1,4 +1,4 @@
-/* Header and nav layout */
+/* header and nav layout */
 header .nav-wrapper {
   background-color: #373737;
   width: 100%;
@@ -9,8 +9,8 @@ header .nav-wrapper {
 header nav {
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: center; /* Align brand and sections in the same row */
+  justify-content: space-between; /* Ensure the hamburger is on the right */
   max-width: 1248px;
   height: var(--nav-height);
   font-family: var(--body-font-family);
@@ -24,15 +24,15 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
-  text-decoration: none;
+  text-decoration: none; /* Remove default underline */
 }
 
-/* Brand */
+/* brand */
 header .nav-brand {
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
-  margin-right: 20px;
+  margin-right: 20px; /* Add spacing between brand and sections */
 }
 
 header nav .nav-brand img {
@@ -42,16 +42,16 @@ header nav .nav-brand img {
 
 @media (min-width: 1280px) {
   header nav .nav-brand img {
-    width: 204px;
-    height: 24px;
+    width: 204px; /* Increase logo size on larger screens */
+    height: 24px; /* Set logo height */
   }
 }
 
-/* Sections */
+/* sections */
 header nav .nav-sections {
   flex: 1;
   display: flex;
-  gap: 24px;
+  gap: 24px; /* Space between menu items */
 }
 
 header nav .nav-sections ul {
@@ -64,32 +64,46 @@ header nav .nav-sections ul {
 header nav .nav-sections ul > li {
   font-weight: 600;
   position: relative;
-  padding-bottom: 5px;
-  transition: border-bottom 0.3s ease;
-  border-bottom: 3px solid transparent;
-  white-space: nowrap;
+  padding-bottom: 5px; /* Adds space for the underline */
+  transition: border-bottom 0.3s ease; /* Smooth transition for underline */
+  border-bottom: 3px solid transparent; /* Start with no border-bottom */
+  white-space: nowrap; /* Prevent the text from wrapping to a new line */
   flex-direction: column;
   font-family: Poppins;
   font-size: 15px;
+  font-stretch: normal;
+  font-style: normal;
+  display: flex;
   color: hsla(0, 0%, 100%, .8);
+  text-transform: none;
   cursor: pointer;
 }
 
-/* Hover effect with yellow underline */
+/* Hover effect with yellow underline for li items */
 header nav .nav-sections ul > li:hover {
-  border-bottom: 3px solid yellow;
+  border-bottom: 3px solid yellow; /* Yellow underline effect */
+}
+
+/* Ensure anchor links have no underline */
+header nav .nav-sections ul > li a {
+  text-decoration: none; /* Ensure links don't have underline */
+  white-space: nowrap; /* Prevent anchor text from wrapping */
+}
+
+header nav .nav-sections ul > li > ul {
+  margin-top: 0;
 }
 
 /* Dropdown for subsections */
 header nav .nav-sections ul > li > ul {
   display: none;
   position: absolute;
-  top: 100%;
+  top: 100%; /* Ensure it appears below the parent li */
   left: 0;
-  z-index: 1;
-  background-color: #373737;
-  padding: 10px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1; /* Ensure it appears above other content */
+  background-color: #373737; /* Set the background color of the dropdown */
+  padding: 10px 0; /* Add some padding around the dropdown items */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add shadow for better visibility */
 }
 
 header nav .nav-sections ul > li:hover > ul {
@@ -97,89 +111,61 @@ header nav .nav-sections ul > li:hover > ul {
 }
 
 header nav .nav-sections ul > li > ul li {
-  padding: 10px 20px;
+  padding: 10px 20px; /* Add padding for submenu items */
 }
 
 header nav .nav-sections ul > li > ul li:hover {
-  background-color: rgba(255, 255, 0, 0.1);
+  background-color: rgba(255, 255, 0, 0.1); /* Highlight effect for submenu items */
 }
 
 /* Mobile Styles */
 header nav .nav-hamburger {
-  display: none;
+  display: none; /* Initially hide hamburger menu */
 }
 
 @media (max-width: 767px) {
-  header nav .nav-hamburger {
-    display: block;
-    cursor: pointer;
-    order: 2;
+  header nav {
+    justify-content: space-between; /* Ensure space between elements */
   }
 
-  /* Hide menu sections by default */
   header nav .nav-sections {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
+    display: none; /* Hide sections by default */
+    flex-direction: column; /* Stack vertically */
+    position: absolute; /* Position the menu */
+    top: 60px; /* Adjust based on your header height */
     left: 0;
     right: 0;
-    background-color: #373737;
-    z-index: 1000;
+    background-color: #373737; /* Background for menu */
+    z-index: 1000; /* Ensure it is on top */
   }
 
-  /* Show when active */
   header nav .nav-sections.active {
+    display: flex; /* Show on toggle */
+  }
+
+  header nav .nav-hamburger {
+    display: block; /* Show hamburger on mobile */
+    cursor: pointer;
+    order: 2; /* Ensure hamburger is on the right side */
+  }
+
+  header nav .search-container {
+    flex-grow: 1; /* Push hamburger to the right */
     display: flex;
+    justify-content: flex-end;
   }
 
   header nav .nav-sections ul {
-    flex-direction: column;
+    flex-direction: column; /* Stack list items */
   }
 
   header nav .nav-sections ul > li {
-    padding: 10px;
+    padding: 10px; /* Adjust padding for mobile */
   }
 }
 
 @media (min-width: 900px) {
   header nav .nav-hamburger {
-    display: none;
+    display: none; /* Hide hamburger on larger screens */
   }
-}
-
-/* Overriding default blue button style for the hamburger */
-header nav .nav-hamburger button {
-  background: none;
-  border: none;
-}
-
-header nav .nav-hamburger button:focus {
-  outline: none;
-}
-
-header nav .nav-hamburger button .nav-hamburger-icon {
-  display: inline-block;
-  width: 30px;
-  height: 2px;
-  background-color: #ffffff;
-  position: relative;
-}
-
-header nav .nav-hamburger button .nav-hamburger-icon::before,
-header nav .nav-hamburger button .nav-hamburger-icon::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 30px;
-  height: 2px;
-  background-color: #ffffff;
-}
-
-header nav .nav-hamburger button .nav-hamburger-icon::before {
-  top: -8px;
-}
-
-header nav .nav-hamburger button .nav-hamburger-icon::after {
-  bottom: -8px;
 }
