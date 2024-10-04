@@ -106,16 +106,16 @@ header nav .nav-sections ul > li > ul li:hover {
 
 /* Submenu Styles */
 .nav-drop ul {
-    display: none; /* Hide all submenus by default */
-    position: absolute; /* To prevent layout shifts */
+  display: none; /* Hide all submenus by default */
+  position: absolute; /* To prevent layout shifts */
 }
 
 .nav-drop[aria-expanded="true"] ul {
-    display: block; /* Show submenu when parent is expanded */
+  display: block; /* Show submenu when parent is expanded */
 }
 
 .nav-sections > .nav-drop:hover > ul {
-    display: block; /* Show submenu on hover */
+  display: block; /* Show submenu on hover */
 }
 
 /* Mobile Styles */
@@ -133,7 +133,8 @@ header nav .nav-hamburger {
   header .nav-brand {
     margin-right: auto; /* Align logo to the left */
   }
-header nav .nav-sections {
+
+  header nav .nav-sections {
     display: none; /* Hide menu sections by default */
   }
 
@@ -155,7 +156,7 @@ header nav .nav-sections {
     z-index: 1000;
   }
 
-header nav[aria-expanded="true"] .nav-sections {
+  header nav[aria-expanded="true"] .nav-sections {
     display: flex; /* Show sections when nav is expanded */
     flex-direction: column; /* Stack sections vertically */
   }
@@ -209,4 +210,10 @@ header nav .nav-hamburger button .nav-hamburger-icon::before {
 
 header nav .nav-hamburger button .nav-hamburger-icon::after {
   bottom: -8px;
+}
+
+/* Ensure that all items are aligned in the same row */
+header nav {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
 }
