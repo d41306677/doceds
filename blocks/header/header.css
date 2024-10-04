@@ -10,10 +10,8 @@ header nav {
   box-sizing: border-box;
   display: flex;
   align-items: center; /* Align brand and sections in the same row */
-  /* margin: auto; */
   max-width: 1248px;
   height: var(--nav-height);
- /* padding: 0 24px; */
   font-family: var(--body-font-family);
   color: #ffffff; 
 }
@@ -40,12 +38,14 @@ header nav .nav-brand img {
   width: 128px;
   height: auto;
 }
+
 @media (min-width: 1280px) {
   header nav .nav-brand img {
     width: 204px; /* Increase logo size on larger screens */
     height: 24px; /* Set logo height */
   }
 }
+
 /* sections */
 header nav .nav-sections {
   flex: 1;
@@ -73,9 +73,9 @@ header nav .nav-sections ul > li {
   font-stretch: normal;
   font-style: normal;
   display: flex;
-  color: hsla(0,0%,100%,.8);
+  color: hsla(0, 0%, 100%, .8);
   text-transform: none;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 /* Hover effect with yellow underline for li items */
@@ -107,8 +107,8 @@ header nav .nav-sections ul > li > ul {
 
 header nav .nav-sections ul > li:hover > ul {
   display: block;
-
 }
+
 header nav .nav-sections ul > li > ul li {
   padding: 10px 20px; /* Add padding for submenu items */
 }
@@ -116,8 +116,44 @@ header nav .nav-sections ul > li > ul li {
 header nav .nav-sections ul > li > ul li:hover {
   background-color: rgba(255, 255, 0, 0.1); /* Highlight effect for submenu items */
 }
+
+/* Mobile Styles */
+header nav .nav-hamburger {
+  display: none; /* Initially hide hamburger menu */
+}
+
+@media (max-width: 767px) {
+  header nav .nav-hamburger {
+    display: block; /* Show hamburger on mobile */
+    cursor: pointer;
+  }
+
+  header nav .nav-sections {
+    display: none; /* Hide sections by default */
+    flex-direction: column; /* Stack vertically */
+    position: absolute; /* Position the menu */
+    top: 60px; /* Adjust based on your header height */
+    left: 0;
+    right: 0;
+    background-color: #373737; /* Background for menu */
+    z-index: 1000; /* Ensure it is on top */
+  }
+
+  header nav .nav-sections.active {
+    display: flex; /* Show on toggle */
+  }
+
+  header nav .nav-sections ul {
+    flex-direction: column; /* Stack list items */
+  }
+
+  header nav .nav-sections ul > li {
+    padding: 10px; /* Adjust padding for mobile */
+  }
+}
+
 @media (width >= 900px) {
   header nav .nav-hamburger {
-    display: none;
+    display: none; /* Hide hamburger in larger screens */
   }
 }
