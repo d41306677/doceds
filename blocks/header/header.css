@@ -65,7 +65,6 @@ header nav .nav-sections ul > li {
   transition: border-bottom 0.3s ease;
   border-bottom: 3px solid transparent;
   white-space: nowrap;
-  flex-direction: column;
   font-family: Poppins;
   font-size: 15px;
   color: hsla(0, 0%, 100%, .8);
@@ -90,29 +89,16 @@ header nav .nav-sections ul > li > ul {
 }
 
 header nav .nav-sections ul > li:hover > ul {
-  display: block;
+  display: block; /* Show submenu on hover */
 }
 
 header nav .nav-sections ul > li > ul li {
   padding: 10px 20px;
+  color: hsla(0, 0%, 100%, .8); /* Ensure submenu text is visible */
 }
 
 header nav .nav-sections ul > li > ul li:hover {
-  background-color: rgba(255, 255, 0, 0.1);
-}
-
-/* Submenu Styles */
-.nav-drop ul {
-  display: none; /* Hide all submenus by default */
-  position: absolute; /* To prevent layout shifts */
-}
-
-.nav-drop[aria-expanded="true"] ul {
-  display: block; /* Show submenu when parent is expanded */
-}
-
-.nav-sections > .nav-drop:hover > ul {
-  display: block; /* Show submenu on hover */
+  background-color: rgba(255, 255, 0, 0.1); /* Background on hover for submenu items */
 }
 
 /* Mobile Styles */
