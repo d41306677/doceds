@@ -9,21 +9,30 @@ header .nav-wrapper {
 header nav {
   box-sizing: border-box;
   display: flex;
-  align-items: center; /* Center items vertically */
-  justify-content: space-between; /* Distribute space between items */
+  align-items: center;
+  justify-content: space-between;
   max-width: 1248px;
   height: var(--nav-height);
   font-family: var(--body-font-family);
   color: #ffffff;
-  padding: 0 20px; /* Add padding for better spacing */
 }
 
-/* Logo */
+header nav p {
+  margin: 0;
+  line-height: 1;
+}
+
+header nav a:any-link {
+  color: currentcolor;
+  text-decoration: none;
+}
+
+/* Brand */
 header .nav-brand {
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
-  margin-right: 20px; /* Space between logo and search */
+  margin-right: 20px;
 }
 
 header nav .nav-brand img {
@@ -38,19 +47,13 @@ header nav .nav-brand img {
   }
 }
 
-/* Search Icon */
-header nav .nav-search {
-  margin-right: auto; /* Pushes the hamburger to the right */
-}
-
 /* Sections */
 header nav .nav-sections {
-  display: flex; /* Keep sections in a single line */
-  align-items: center; /* Align items in the center */
-  gap: 24px; /* Space between sections */
+  flex: 1;
+  display: flex;
+  gap: 24px;
 }
 
-/* Add search and hamburger to sections */
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
@@ -65,6 +68,7 @@ header nav .nav-sections ul > li {
   transition: border-bottom 0.3s ease;
   border-bottom: 3px solid transparent;
   white-space: nowrap;
+  flex-direction: column;
   font-family: Poppins;
   font-size: 15px;
   color: hsla(0, 0%, 100%, .8);
@@ -89,51 +93,75 @@ header nav .nav-sections ul > li > ul {
 }
 
 header nav .nav-sections ul > li:hover > ul {
-  display: block; /* Show submenu on hover */
+  display: block;
 }
 
 header nav .nav-sections ul > li > ul li {
   padding: 10px 20px;
-  color: hsla(0, 0%, 100%, .8); /* Ensure submenu text is visible */
 }
 
 header nav .nav-sections ul > li > ul li:hover {
-  background-color: rgba(255, 255, 0, 0.1); /* Background on hover for submenu items */
+  background-color: rgba(255, 255, 0, 0.1);
+}
+
+/* Submenu Styles */
+.nav-drop ul {
+    display: none; /* Hide all submenus by default */
+    position: absolute; /* To prevent layout shifts */
+}
+
+.nav-drop[aria-expanded="true"] ul {
+    display: block; /* Show submenu when parent is expanded */
+}
+
+.nav-sections > .nav-drop:hover > ul {
+    display: block; /* Show submenu on hover */
 }
 
 /* Mobile Styles */
 header nav .nav-hamburger {
-  display: none; /* Hide hamburger by default */
+  display: none;
 }
 
 @media (max-width: 767px) {
   header nav {
-    flex-direction: row; /* Ensure row layout for mobile */
-    align-items: center; /* Align items to center */
+    flex-direction: column; /* Change to column for mobile layout */
+    align-items: flex-start; /* Align items to the start */
     padding: 10px;
   }
 
   header .nav-brand {
-    margin-right: 20px; /* Space between logo and search */
+    margin-right: auto; /* Align logo to the left */
   }
-
-  header nav .nav-sections {
+header nav .nav-sections {
     display: none; /* Hide menu sections by default */
   }
 
   header nav .nav-hamburger {
-    display: block; /* Show hamburger */
+    display: block;
     cursor: pointer;
-    margin-left: auto; /* Align hamburger to the right */
+    order: 2; /* Move hamburger to the end */
   }
 
-  header nav[aria-expanded="true"] .nav-sections {
+  /* Hide menu sections by default */
+  header nav .nav-sections {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Adjust according to your header height */
+    left: 0;
+    right: 0;
+    background-color: #373737;
+    z-index: 1000;
+  }
+
+header nav[aria-expanded="true"] .nav-sections {
     display: flex; /* Show sections when nav is expanded */
     flex-direction: column; /* Stack sections vertically */
   }
 
   header nav .nav-sections ul {
-    flex-direction: column; /* Stack sections vertically */
+    flex-direction: column;
   }
 
   header nav .nav-sections ul > li {
@@ -143,7 +171,7 @@ header nav .nav-hamburger {
 
 @media (min-width: 900px) {
   header nav .nav-hamburger {
-    display: none; /* Hide hamburger on larger screens */
+    display: none;
   }
 }
 
