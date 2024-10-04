@@ -73,6 +73,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  
+  navSections.classList.toggle('active');  // Toggle active class to show/hide menu
+
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
@@ -91,17 +94,15 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     });
   }
 
-  // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
     nav.removeEventListener('focusout', closeOnFocusLost);
   }
 }
+
 
 /**
  * loads and decorates the header, mainly the nav
