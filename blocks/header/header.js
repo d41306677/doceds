@@ -52,13 +52,13 @@ function focusNavSection() {
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', expanded);
-    const submenu = section.querySelector('.submenu');
-    if (submenu) {
-      submenu.style.display = expanded ? 'block' : 'none';
-    }
-  });
+    sections.querySelectorAll('.nav-sections .nav-drop').forEach((section) => {
+        section.setAttribute('aria-expanded', expanded);
+        const submenu = section.querySelector('ul'); // Select the submenu directly
+        if (submenu) {
+            submenu.style.display = expanded ? 'block' : 'none'; // Use display property
+        }
+    });
 }
 
 /**
@@ -93,6 +93,14 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
         const submenu = drop.querySelector('.submenu');
         if (submenu) {
           submenu.style.display = dropExpanded ? 'none' : 'block';
+        }
+      });
+
+      // Added handling for keyboard navigation
+      drop.addEventListener('keydown', (e) => {
+        if (e.code === 'Enter' || e.code === 'Space') {
+          e.preventDefault(); // Prevent the default action (e.g., scrolling)
+          drop.click(); // Simulate a click on the dropdown
         }
       });
     });
