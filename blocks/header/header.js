@@ -95,14 +95,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
           submenu.style.display = dropExpanded ? 'none' : 'block';
         }
       });
-
-      // Added handling for keyboard navigation
-      drop.addEventListener('keydown', (e) => {
-        if (e.code === 'Enter' || e.code === 'Space') {
-          e.preventDefault(); // Prevent the default action (e.g., scrolling)
-          drop.click(); // Simulate a click on the dropdown
-        }
-      });
     });
   } else {
     navDrops.forEach((drop) => {
