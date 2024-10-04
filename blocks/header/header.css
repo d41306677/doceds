@@ -9,12 +9,13 @@ header .nav-wrapper {
 header nav {
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Distribute space between items */
   max-width: 1248px;
   height: var(--nav-height);
   font-family: var(--body-font-family);
   color: #ffffff;
+  padding: 0 20px; /* Add padding for better spacing */
 }
 
 header nav p {
@@ -49,11 +50,12 @@ header nav .nav-brand img {
 
 /* Sections */
 header nav .nav-sections {
-  flex: 1;
-  display: flex;
-  gap: 24px;
+  display: flex; /* Keep sections in a single line */
+  align-items: center; /* Align items in the center */
+  gap: 24px; /* Space between sections */
 }
 
+/* Add search and hamburger to sections */
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
@@ -120,13 +122,13 @@ header nav .nav-sections ul > li > ul li:hover {
 
 /* Mobile Styles */
 header nav .nav-hamburger {
-  display: none;
+  display: none; /* Hide hamburger by default */
 }
 
 @media (max-width: 767px) {
   header nav {
-    flex-direction: column; /* Change to column for mobile layout */
-    align-items: flex-start; /* Align items to the start */
+    flex-direction: row; /* Ensure row layout for mobile */
+    align-items: center; /* Align items to center */
     padding: 10px;
   }
 
@@ -139,21 +141,9 @@ header nav .nav-hamburger {
   }
 
   header nav .nav-hamburger {
-    display: block;
+    display: block; /* Show hamburger */
     cursor: pointer;
-    order: 2; /* Move hamburger to the end */
-  }
-
-  /* Hide menu sections by default */
-  header nav .nav-sections {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px; /* Adjust according to your header height */
-    left: 0;
-    right: 0;
-    background-color: #373737;
-    z-index: 1000;
+    margin-left: auto; /* Align hamburger to the right */
   }
 
   header nav[aria-expanded="true"] .nav-sections {
@@ -162,7 +152,7 @@ header nav .nav-hamburger {
   }
 
   header nav .nav-sections ul {
-    flex-direction: column;
+    flex-direction: column; /* Stack sections vertically */
   }
 
   header nav .nav-sections ul > li {
@@ -172,7 +162,7 @@ header nav .nav-hamburger {
 
 @media (min-width: 900px) {
   header nav .nav-hamburger {
-    display: none;
+    display: none; /* Hide hamburger on larger screens */
   }
 }
 
@@ -210,10 +200,4 @@ header nav .nav-hamburger button .nav-hamburger-icon::before {
 
 header nav .nav-hamburger button .nav-hamburger-icon::after {
   bottom: -8px;
-}
-
-/* Ensure that all items are aligned in the same row */
-header nav {
-  display: flex; /* Use flexbox for layout */
-  flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
 }
