@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   menuItems.forEach(item => {
     // Set aria-expanded to false on page load
-    item.setAttribute('aria-expanded', 'false');
+    item.setAttribute('aria-expanded', 'true');
 
     // Hide the submenu
     const submenu = item.nextElementSibling;
