@@ -34,7 +34,7 @@ function closeOnFocusLost(e) {
 
 function openOnKeydown(e) {
   const focused = document.activeElement;
-  const isNavDrop = focused.classList.contains('nav-drop'); // Use classList.contains for clarity
+  const isNavDrop = focused.classList.contains('nav-drop');
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
     toggleAllNavSections(focused.closest('.nav-sections'));
@@ -52,13 +52,13 @@ function focusNavSection() {
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
-    sections.querySelectorAll('.nav-sections .nav-drop').forEach((section) => {
-        section.setAttribute('aria-expanded', expanded);
-        const submenu = section.querySelector('ul'); // Select the submenu directly
-        if (submenu) {
-            submenu.style.display = expanded ? 'block' : 'none'; // Use display property
-        }
-    });
+  sections.querySelectorAll('.nav-drop').forEach((section) => {
+    section.setAttribute('aria-expanded', expanded);
+    const submenu = section.querySelector('ul'); // Select the submenu directly
+    if (submenu) {
+      submenu.style.display = expanded ? 'block' : 'none'; // Use display property
+    }
+  });
 }
 
 /**
@@ -73,7 +73,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
 
-  navSections.classList.toggle('active');  // Toggle active class to show/hide menu
+  navSections.classList.toggle('active'); // Toggle active class to show/hide menu
   toggleAllNavSections(navSections, expanded || isDesktop.matches);
 
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
@@ -213,15 +213,15 @@ export default async function decorate(block) {
 // Add DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', function () {
   // Get all menu items that have submenus
-  const menuItems = document.querySelectorAll('.menu-item[aria-expanded]');
+  const menuItems = document.querySelectorAll('.nav-drop');
 
   menuItems.forEach(item => {
     // Set aria-expanded to false on page load
     item.setAttribute('aria-expanded', 'false');
-
-    // Hide the submenu
-    const submenu = item.nextElementSibling;
-    if (submenu && submenu.classList.contains('submenu')) {
+    
+    // Hide submenu on page load
+    const submenu = item.querySelector('ul');
+    if (submenu) {
       submenu.style.display = 'none';
     }
   });
