@@ -104,16 +104,40 @@ header nav .nav-sections ul > li > ul li:hover {
   background-color: rgba(255, 255, 0, 0.1);
 }
 
+/* Submenu Styles */
+.nav-drop ul {
+    display: none; /* Hide all submenus by default */
+    position: absolute; /* To prevent layout shifts */
+}
+
+.nav-drop[aria-expanded="true"] ul {
+    display: block; /* Show submenu when parent is expanded */
+}
+
+.nav-sections > .nav-drop:hover > ul {
+    display: block; /* Show submenu on hover */
+}
+
 /* Mobile Styles */
 header nav .nav-hamburger {
   display: none;
 }
 
 @media (max-width: 767px) {
+  header nav {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px; /* Adjust padding as necessary */
+  }
+
+  header .nav-brand {
+    margin-right: auto; /* Align logo to the left */
+  }
+
   header nav .nav-hamburger {
     display: block;
     cursor: pointer;
-    order: 2;
+    order: 2; /* Move hamburger to the end */
   }
 
   /* Hide menu sections by default */
@@ -121,7 +145,7 @@ header nav .nav-hamburger {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 60px; /* Adjust according to your header height */
     left: 0;
     right: 0;
     background-color: #373737;
