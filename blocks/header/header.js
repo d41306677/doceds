@@ -10,11 +10,9 @@ function closeOnEscape(e) {
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections);
       navSectionExpanded.focus();
     } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
     }
@@ -27,10 +25,8 @@ function closeOnFocusLost(e) {
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections, false);
     } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections, false);
     }
   }
@@ -41,7 +37,6 @@ function openOnKeydown(e) {
   const isNavDrop = focused.className === 'nav-drop';
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
     toggleAllNavSections(focused.closest('.nav-sections'));
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
@@ -59,6 +54,10 @@ function focusNavSection() {
 function toggleAllNavSections(sections, expanded = false) {
   sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
+    const submenu = section.querySelector('.submenu');
+    if (submenu) {
+      submenu.style.display = expanded ? 'block' : 'none';
+    }
   });
 }
 
@@ -78,6 +77,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -86,6 +86,15 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
         drop.setAttribute('tabindex', 0);
         drop.addEventListener('focus', focusNavSection);
       }
+      drop.addEventListener('click', () => {
+        const expanded = drop.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        drop.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        const submenu = drop.querySelector('.submenu');
+        if (submenu) {
+          submenu.style.display = expanded ? 'none' : 'block';
+        }
+      });
     });
   } else {
     navDrops.forEach((drop) => {
@@ -141,6 +150,10 @@ export default async function decorate(block) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          const submenu = navSection.querySelector('.submenu');
+          if (submenu) {
+            submenu.style.display = expanded ? 'none' : 'block';
+          }
         }
       });
     });
@@ -166,40 +179,40 @@ export default async function decorate(block) {
 
   // Select the target element you want to replace
   const targetElement = document.querySelector('.default-content-wrapper');
-  
+
   // Create a new div element
   const newDiv = document.createElement('div');
   newDiv.className = 'default-content-wrapper';
-  
+
   // Create a new img element for the SVG
   const newImage = document.createElement('img');
-  newImage.className ="logo"
+  newImage.className = "logo"
   newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
   newImage.alt = 'DeVry University Logo';
   newImage.style.width = '240px'; // Adjust the width as per your needs
-  
+
   // Append the p and img elements to the div
   newDiv.appendChild(newImage);
-  
+
   // Replace the old content with the new div
   if (targetElement) {
-      targetElement.replaceWith(newDiv);
-  } 
+    targetElement.replaceWith(newDiv);
+  }
 }
 
 // Add DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all menu items that have submenus
-    const menuItems = document.querySelectorAll('.menu-item[aria-expanded]');
+document.addEventListener('DOMContentLoaded', function () {
+  // Get all menu items that have submenus
+  const menuItems = document.querySelectorAll('.menu-item[aria-expanded]');
 
-    menuItems.forEach(item => {
-        // Set aria-expanded to false on page load
-        item.setAttribute('aria-expanded', 'false');
+  menuItems.forEach(item => {
+    // Set aria-expanded to false on page load
+    item.setAttribute('aria-expanded', 'false');
 
-        // Hide the submenu
-        const submenu = item.nextElementSibling;
-        if (submenu && submenu.classList.contains('submenu')) {
-            submenu.style.display = 'none';
-        }
-    });
+    // Hide the submenu
+    const submenu = item.nextElementSibling;
+    if (submenu && submenu.classList.contains('submenu')) {
+      submenu.style.display = 'none';
+    }
+  });
 });
