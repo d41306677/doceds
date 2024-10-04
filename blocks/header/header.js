@@ -188,7 +188,18 @@ if (targetElement) {
 } 
 }
 // Add DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', () => {
-  const block = document.querySelector('.header-block'); // Ensure to replace this with your actual header block selector
-  decorate(block);
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all menu items that have submenus
+    const menuItems = document.querySelectorAll('.menu-item[aria-expanded]');
+
+    menuItems.forEach(item => {
+        // Set aria-expanded to false on page load
+        item.setAttribute('aria-expanded', 'false');
+
+        // Hide the submenu
+        const submenu = item.nextElementSibling;
+        if (submenu && submenu.classList.contains('submenu')) {
+            submenu.style.display = 'none';
+        }
+    });
 });
