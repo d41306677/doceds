@@ -1,7 +1,7 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-// media query match that indicates mobile/tablet width
+// Media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
 function closeOnEscape(e) {
@@ -34,7 +34,7 @@ function closeOnFocusLost(e) {
 
 function openOnKeydown(e) {
   const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
+  const isNavDrop = focused.classList.contains('nav-drop'); // Use classList.contains for clarity
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
     toggleAllNavSections(focused.closest('.nav-sections'));
@@ -72,13 +72,13 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  
-  navSections.classList.toggle('active');  // Toggle active class to show/hide menu
 
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  navSections.classList.toggle('active');  // Toggle active class to show/hide menu
+  toggleAllNavSections(navSections, expanded || isDesktop.matches);
+
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  
-  // enable nav dropdown keyboard accessibility
+
+  // Enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
     navDrops.forEach((drop) => {
@@ -87,12 +87,12 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
         drop.addEventListener('focus', focusNavSection);
       }
       drop.addEventListener('click', () => {
-        const expanded = drop.getAttribute('aria-expanded') === 'true';
+        const dropExpanded = drop.getAttribute('aria-expanded') === 'true';
         toggleAllNavSections(navSections);
-        drop.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        drop.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
         const submenu = drop.querySelector('.submenu');
         if (submenu) {
-          submenu.style.display = expanded ? 'none' : 'block';
+          submenu.style.display = dropExpanded ? 'none' : 'block';
         }
       });
     });
@@ -103,6 +103,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     });
   }
 
+  // Manage keyboard accessibility
   if (!expanded || isDesktop.matches) {
     window.addEventListener('keydown', closeOnEscape);
     nav.addEventListener('focusout', closeOnFocusLost);
@@ -113,16 +114,16 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
- * loads and decorates the header, mainly the nav
+ * Loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
+  // Load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // decorate nav DOM
+  // Decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
@@ -159,7 +160,7 @@ export default async function decorate(block) {
     });
   }
 
-  // hamburger for mobile
+  // Hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
@@ -168,7 +169,8 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
+
+  // Prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
@@ -186,12 +188,12 @@ export default async function decorate(block) {
 
   // Create a new img element for the SVG
   const newImage = document.createElement('img');
-  newImage.className = "logo"
+  newImage.className = "logo";
   newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
   newImage.alt = 'DeVry University Logo';
   newImage.style.width = '240px'; // Adjust the width as per your needs
 
-  // Append the p and img elements to the div
+  // Append the img element to the div
   newDiv.appendChild(newImage);
 
   // Replace the old content with the new div
@@ -207,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   menuItems.forEach(item => {
     // Set aria-expanded to false on page load
-    item.setAttribute('aria-expanded', 'true');
+    item.setAttribute('aria-expanded', 'false');
 
     // Hide the submenu
     const submenu = item.nextElementSibling;
