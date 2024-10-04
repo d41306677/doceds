@@ -52,13 +52,13 @@ function focusNavSection() {
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
-    sections.querySelectorAll('.nav-sections .nav-drop').forEach((section) => {
-        section.setAttribute('aria-expanded', expanded);
-        const submenu = section.querySelector('ul'); // Select the submenu directly
-        if (submenu) {
-            submenu.style.display = expanded ? 'block' : 'none'; // Use display property
-        }
-    });
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
+    section.setAttribute('aria-expanded', expanded);
+    const submenu = section.querySelector('.submenu');
+    if (submenu) {
+      submenu.style.display = expanded ? 'block' : 'none';
+    }
+  });
 }
 
 /**
