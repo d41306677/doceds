@@ -1,7 +1,7 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-// Media query match that indicates mobile/tablet width
+// media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
 function closeOnEscape(e) {
@@ -10,9 +10,11 @@ function closeOnEscape(e) {
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections);
       navSectionExpanded.focus();
     } else if (!isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
     }
@@ -25,8 +27,10 @@ function closeOnFocusLost(e) {
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections, false);
     } else if (!isDesktop.matches) {
+      // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections, false);
     }
   }
@@ -34,9 +38,10 @@ function closeOnFocusLost(e) {
 
 function openOnKeydown(e) {
   const focused = document.activeElement;
-  const isNavDrop = focused.classList.contains('nav-drop'); // Use classList.contains for clarity
+  const isNavDrop = focused.className === 'nav-drop';
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
+    // eslint-disable-next-line no-use-before-define
     toggleAllNavSections(focused.closest('.nav-sections'));
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
@@ -52,13 +57,9 @@ function focusNavSection() {
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
-    sections.querySelectorAll('.nav-sections .nav-drop').forEach((section) => {
-        section.setAttribute('aria-expanded', expanded);
-        const submenu = section.querySelector('ul'); // Select the submenu directly
-        if (submenu) {
-            submenu.style.display = expanded ? 'block' : 'none'; // Use display property
-        }
-    });
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
+    section.setAttribute('aria-expanded', expanded);
+  });
 }
 
 /**
@@ -72,45 +73,29 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-
-  navSections.classList.toggle('active');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches);
-
+  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-
-  // Enable nav dropdown keyboard accessibility
+  // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
-  navDrops.forEach((drop) => {
-    if (isDesktop.matches) {
-      drop.setAttribute('tabindex', 0);
-      drop.addEventListener('focus', focusNavSection);
-    } else {
+  if (isDesktop.matches) {
+    navDrops.forEach((drop) => {
+      if (!drop.hasAttribute('tabindex')) {
+        drop.setAttribute('tabindex', 0);
+        drop.addEventListener('focus', focusNavSection);
+      }
+    });
+  } else {
+    navDrops.forEach((drop) => {
       drop.removeAttribute('tabindex');
       drop.removeEventListener('focus', focusNavSection);
-    }
-
-    drop.addEventListener('click', () => {
-      const dropExpanded = drop.getAttribute('aria-expanded') === 'true';
-      toggleAllNavSections(navSections);
-      drop.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-      const submenu = drop.querySelector('.submenu');
-      if (submenu) {
-        submenu.style.display = dropExpanded ? 'none' : 'block';
-      }
     });
+  }
 
-    // Handle keyboard navigation
-    drop.addEventListener('keydown', (e) => {
-      if (e.code === 'Enter' || e.code === 'Space') {
-        e.preventDefault(); 
-        drop.click(); 
-      }
-    });
-  });
-
-  // Manage keyboard accessibility
+  // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
+    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
+    // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
@@ -118,18 +103,17 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-
 /**
- * Loads and decorates the header, mainly the nav
+ * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // Load nav as fragment
+  // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // Decorate nav DOM
+  // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
@@ -157,16 +141,12 @@ export default async function decorate(block) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          const submenu = navSection.querySelector('.submenu');
-          if (submenu) {
-            submenu.style.display = expanded ? 'none' : 'block';
-          }
         }
       });
     });
   }
 
-  // Hamburger for mobile
+  // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
@@ -175,8 +155,7 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-
-  // Prevent mobile nav behavior on window resize
+  // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
@@ -186,54 +165,24 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
   // Select the target element you want to replace
-  const targetElement = document.querySelector('.default-content-wrapper');
-
-  // Create a new div element
-  const newDiv = document.createElement('div');
-  newDiv.className = 'default-content-wrapper';
-
-  // Create a new img element for the SVG
-  const newImage = document.createElement('img');
-  newImage.className = "logo";
-  newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
-  newImage.alt = 'DeVry University Logo';
-  newImage.style.width = '240px'; // Adjust the width as per your needs
-
-  // Append the img element to the div
-  newDiv.appendChild(newImage);
-
-  // Replace the old content with the new div
-  if (targetElement) {
+const targetElement = document.querySelector('.default-content-wrapper');
+ 
+// Create a new div element
+const newDiv = document.createElement('div');
+newDiv.className = 'default-content-wrapper';
+ 
+// Create a new img element for the SVG
+const newImage = document.createElement('img');
+newImage.className ="logo"
+newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
+newImage.alt = 'DeVry University Logo';
+newImage.style.width = '240px'; // Adjust the width as per your needs
+ 
+// Append the p and img elements to the div
+newDiv.appendChild(newImage);
+ 
+// Replace the old content with the new div
+if (targetElement) {
     targetElement.replaceWith(newDiv);
-  }
+} 
 }
-
-// Add DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', function () {
-  const menuItems = document.querySelectorAll('header nav .nav-sections ul > li');
-
-  menuItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
-      const submenu = this.querySelector('ul');
-      if (submenu) {
-        submenu.style.display = 'block'; // Show submenu on hover
-      }
-    });
-
-    item.addEventListener('mouseleave', function() {
-      const submenu = this.querySelector('ul');
-      if (submenu) {
-        submenu.style.display = 'none'; // Hide submenu when not hovering
-      }
-    });
-
-    // Optionally, toggle submenu on click for mobile
-    item.addEventListener('click', function() {
-      const submenu = this.querySelector('ul');
-      const isExpanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', !isExpanded);
-      submenu.style.display = isExpanded ? 'none' : 'block'; // Toggle submenu visibility
-    });
-  });
-});
-
