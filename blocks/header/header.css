@@ -160,6 +160,9 @@ header nav[aria-expanded="true"] .nav-sections {
     flex-direction: column; /* Stack sections vertically */
   }
 
+  header nav .nav-sections ul {
+    flex-direction: column;
+  }
 
   header nav .nav-sections ul > li {
     padding: 10px;
