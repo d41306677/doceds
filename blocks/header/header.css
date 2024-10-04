@@ -125,13 +125,16 @@ header nav .nav-hamburger {
 
 @media (max-width: 767px) {
   header nav {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px; /* Adjust padding as necessary */
+    flex-direction: column; /* Change to column for mobile layout */
+    align-items: flex-start; /* Align items to the start */
+    padding: 10px;
   }
 
   header .nav-brand {
     margin-right: auto; /* Align logo to the left */
+  }
+header nav .nav-sections {
+    display: none; /* Hide menu sections by default */
   }
 
   header nav .nav-hamburger {
@@ -152,14 +155,11 @@ header nav .nav-hamburger {
     z-index: 1000;
   }
 
-  /* Show when active */
-  header nav .nav-sections.active {
-    display: flex;
+header nav[aria-expanded="true"] .nav-sections {
+    display: flex; /* Show sections when nav is expanded */
+    flex-direction: column; /* Stack sections vertically */
   }
 
-  header nav .nav-sections ul {
-    flex-direction: column;
-  }
 
   header nav .nav-sections ul > li {
     padding: 10px;
