@@ -6,29 +6,7 @@ import { loadFragment } from '../fragment/fragment.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-     // Select the target element you want to replace
-const targetElement = document.querySelector('.footer-wrapper');
- 
-// Create a new div element
-const newDiv = document.createElement('div');
-newDiv.className = 'default-content-wrapper';
-  const hrtag = document.createElement('hr');
-  newdiv.appendChild(hrtag); 
-// Create a new img element for the SVG
-const newImage = document.createElement('img');
-newImage.className ="logo"
-newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
-newImage.alt = 'DeVry University Logo';
-newImage.style.width = '240px'; // Adjust the width as per your needs
- 
-// Append the p and img elements to the div
-newDiv.appendChild(newImage);
- 
-// Replace the old content with the new div
-if (targetElement) {
-    targetElement.appendChild(newDiv);
-} 
-  
+    
   // load footer as fragment
   const footerMeta = getMetadata('footer');
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
