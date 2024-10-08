@@ -17,11 +17,14 @@ footer .footer > div {
     font-stretch: normal;
     font-style: normal;
     font-weight: 400;
-    height: 18px;
+    text-decoration: underline;
     letter-spacing: normal;
     line-height: normal;
 }
-
+/* Exclude the last four paragraphs from having an underline */
+.default-content-wrapper p:nth-last-of-type(-n+4) {
+    text-decoration: none; /* Remove underline from the last four paragraphs */
+}
 footer .footer p {
   margin: 0;
 }
