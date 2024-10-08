@@ -36,8 +36,14 @@ body {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Show ellipsis for long text */
 }
-
+.form-container select option {
+  white-space: normal; /* Allow wrapping for options in the dropdown */
+  word-wrap: break-word; /* Break long words if needed */
+}
 .form-container button {
   padding: 10px 20px;
   background-color: #007BFF;
