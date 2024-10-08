@@ -1,53 +1,94 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+/* Footer Styles */
+footer {
+  background-color: var(--light-color);
+  font-size: var(--body-font-size-xs);
+}
 
-/**
- * loads and decorates the footer
- * @param {Element} block The footer block element
- */
-export default async function decorate(block) {
-  // Load footer as fragment
-  const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const fragment = await loadFragment(footerPath);
+footer .footer > div {
+  margin: auto;
+  max-width: 1200px;
+  padding: 40px 24px 24px;
+}
 
-  // Clear the block and create a new footer container
-  block.textContent = '';
-  const footer = document.createElement('div');
-  footer.classList.add('footer-container'); // Added class for future styling
+footer .footer p {
+  margin: 0;
+}
+/* General Styles */
+.tabs-panel {
+  padding: 20px;
+}
 
-  // Initialize a temporary container for wrapping
-  let wrapper = null;
+/* Remove bullet points from lists */
+.tabs-panel ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-  // Loop through the fragment children
-  while (fragment.firstElementChild) {
-    const child = fragment.firstElementChild;
+.tabs-panel ul li {
+  margin-bottom: 8px;
+}
 
-    // Check if the child is a <p> or <ul> element
-    if (child.tagName === 'P' || child.tagName === 'UL') {
-      // If we're at the start of a new block, create a new wrapper
-      if (!wrapper) {
-        wrapper = document.createElement('div');
-        wrapper.classList.add('degree-program-block');
-      }
+/* Headings */
+.tabs-panel p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 
-      // Append the <p> or <ul> to the wrapper
-      wrapper.append(child);
-    }
-
-    // If we encounter an element that's neither <p> nor <ul>, it indicates the end of a block
-    if (child.tagName !== 'P' && child.tagName !== 'UL' && wrapper) {
-      // Append the wrapped block to the footer
-      footer.append(wrapper);
-      wrapper = null; // Reset wrapper for the next block
-      footer.append(child); // Append the current child if not <p> or <ul>
-    }
+/* Desktop Layout */
+@media (min-width: 768px) {
+  /* Create a flexbox layout to align the headings and lists in a row */
+  .tabs-panel {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+    gap: 20px; /* Space between blocks */
   }
 
-  // If there's an unappended wrapper at the end, append it
-  if (wrapper) {
-    footer.append(wrapper);
+  /* Style each p and ul as flex items, ensuring they are aligned next to each other */
+  .tabs-panel p,
+  .tabs-panel ul {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
   }
 
-  block.append(footer);
+  /* Flex item behavior for each heading and list */
+  .tabs-panel > * {
+    flex: 1 1 30%; /* Ensure each block takes 30% of the width, with space to wrap */
+    min-width: 200px; /* Prevent the items from becoming too narrow */
+  }
+}
+
+/* Mobile Layout */
+@media (max-width: 767px) {
+  /* Stack everything vertically */
+  .tabs-panel {
+    display: block;
+  }
+
+  .tabs-panel p {
+    margin-bottom: 15px;
+  }
+
+  /* Ensure each section takes full width on mobile */
+  .tabs-panel p,
+  .tabs-panel ul {
+    width: 100%;
+  }
+}
+
+.degree-program-block {
+    margin-bottom: 20px; /* Spacing between blocks */
+}
+
+.degree-program-block p {
+    font-weight: bold; /* Style for paragraph headings */
+}
+
+.degree-program-block ul {
+    padding-left: 20px; /* Indentation for list items */
+}
+
+.degree-program-block ul li {
+    list-style-type: disc; /* Bullet points for list items */
 }
