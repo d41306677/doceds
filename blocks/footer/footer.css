@@ -13,75 +13,71 @@ footer .footer > div {
 footer .footer p {
   margin: 0;
 }
-
-@media (min-width: 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
-  }
-}
-
-/* Degrees & Programs Section */
 /* General Styles */
-#degrees-programs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+.tabs-panel {
   padding: 20px;
 }
 
-#degrees-programs h5 {
+/* Remove bullet points from lists */
+.tabs-panel ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tabs-panel ul li {
+  margin-bottom: 8px;
+}
+
+/* Headings */
+.tabs-panel p {
   font-size: 1.2rem;
   margin-bottom: 10px;
   font-weight: bold;
 }
 
-#degrees-programs ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-#degrees-programs ul li {
-  margin-bottom: 8px;
-}
-
 /* Desktop Layout */
 @media (min-width: 768px) {
-  #degrees-programs {
+  /* Create grid layout for the first row with 3 columns */
+  .tabs-panel {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns for the first row */
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
 
-  /* First row with 3 columns: Degree Level, Business, Healthcare */
-  #degrees-programs h5:nth-child(-n+3) {
+  /* First row with "By Degree Level", "Business", "Healthcare" */
+  .tabs-panel p:nth-of-type(1),
+  .tabs-panel p:nth-of-type(2),
+  .tabs-panel p:nth-of-type(3) {
     grid-column: span 1;
   }
 
-  /* Second row with 2 columns: Technology, Keller Graduate */
-  #degrees-programs h5:nth-child(n+4) {
+  /* Second row with "Technology" and "Keller Graduate School" */
+  .tabs-panel p:nth-of-type(4),
+  .tabs-panel p:nth-of-type(5) {
     grid-column: span 1;
   }
 
-  /* Ensure that unordered lists align with the headings */
-  #degrees-programs ul {
+  /* Ensure the corresponding ul aligns under each heading */
+  .tabs-panel ul {
     margin-top: 10px;
   }
 }
 
 /* Mobile Layout */
 @media (max-width: 767px) {
-  #degrees-programs {
+  /* Stack everything vertically */
+  .tabs-panel {
     display: flex;
     flex-direction: column;
   }
 
-  #degrees-programs h5 {
+  .tabs-panel p {
     margin-bottom: 15px;
   }
 
-  /* Ensure each section takes full width on mobile */
-  #degrees-programs h5,
-  #degrees-programs ul {
+  /* Make sure each section takes full width on mobile */
+  .tabs-panel p,
+  .tabs-panel ul {
     width: 100%;
   }
 }
