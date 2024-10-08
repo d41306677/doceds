@@ -6,14 +6,15 @@ import { loadFragment } from '../fragment/fragment.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment
+  // Load footer as fragment
   const footerMeta = getMetadata('footer');
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
   const fragment = await loadFragment(footerPath);
 
-  // decorate footer DOM
+  // Clear the block and create a new footer container
   block.textContent = '';
   const footer = document.createElement('div');
+  footer.classList.add('footer-container'); // Added class for future styling
 
   // Loop through the fragment children
   while (fragment.firstElementChild) {
