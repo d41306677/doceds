@@ -37,6 +37,6 @@ newDiv.appendChild(newImage);
  
 // Replace the old content with the new div
 if (targetElement) {
-    targetElement.replaceWith(newDiv);
+    targetElement.appendChild(newDiv);
 } 
 }
