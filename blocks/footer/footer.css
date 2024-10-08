@@ -76,19 +76,3 @@ footer .footer p {
     width: 100%;
   }
 }
-
-.degree-program-block {
-    margin-bottom: 20px; /* Spacing between blocks */
-}
-
-.degree-program-block p {
-    font-weight: bold; /* Style for paragraph headings */
-}
-
-.degree-program-block ul {
-    padding-left: 20px; /* Indentation for list items */
-}
-
-.degree-program-block ul li {
-    list-style-type: disc; /* Bullet points for list items */
-}
