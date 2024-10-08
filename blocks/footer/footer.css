@@ -1,7 +1,8 @@
 /* Footer Styles */
 footer {
-  background-color: var(--light-color);
+  background-color: #373737;
   font-size: var(--body-font-size-xs);
+  color: #ffffff;
 }
 
 footer .footer > div {
@@ -13,6 +14,7 @@ footer .footer > div {
 footer .footer p {
   margin: 0;
 }
+
 /* General Styles */
 .tabs-panel {
   padding: 20px;
@@ -26,6 +28,26 @@ footer .footer p {
 
 .tabs-panel ul li {
   margin-bottom: 8px;
+}
+
+/* Link Styles */
+.tabs-panel ul li a {
+  color: #fec221;
+  font-family: Poppins;
+  font-size: 9pt;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 400;
+  height: 20px;
+  letter-spacing: normal;
+  line-height: 1.67;
+  text-decoration: none; /* No underline */
+}
+
+/* Hover Styles */
+.tabs-panel ul li a:hover {
+  color: #fec221; /* Same color on hover */
+  text-decoration: none; /* No underline on hover */
 }
 
 /* Headings */
