@@ -6,25 +6,14 @@ import { loadFragment } from '../fragment/fragment.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment
-  const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const fragment = await loadFragment(footerPath);
-
-  // decorate footer DOM
-  block.textContent = '';
-  const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
-
-  block.append(footer);
-
-   // Select the target element you want to replace
+     // Select the target element you want to replace
 const targetElement = document.querySelector('.footer-wrapper');
  
 // Create a new div element
 const newDiv = document.createElement('div');
 newDiv.className = 'default-content-wrapper';
- 
+  const hrtag = document.createElement('hr');
+  newdiv.appendChild(hrtag); 
 // Create a new img element for the SVG
 const newImage = document.createElement('img');
 newImage.className ="logo"
@@ -39,4 +28,16 @@ newDiv.appendChild(newImage);
 if (targetElement) {
     targetElement.appendChild(newDiv);
 } 
+  
+  // load footer as fragment
+  const footerMeta = getMetadata('footer');
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const fragment = await loadFragment(footerPath);
+
+  // decorate footer DOM
+  block.textContent = '';
+  const footer = document.createElement('div');
+  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+
+  block.append(footer);
 }
