@@ -14,7 +14,27 @@ export default async function decorate(block) {
   // decorate footer DOM
   block.textContent = '';
   const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+
+  // Loop through the fragment children
+  while (fragment.firstElementChild) {
+    const child = fragment.firstElementChild;
+
+    // Check if the child is a <p> or <ul> element
+    if (child.tagName === 'P' || child.tagName === 'UL') {
+      // Create a new wrapper <div> with the class 'degree-program-block'
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('degree-program-block');
+
+      // Append the <p> or <ul> to the wrapper
+      wrapper.append(child);
+      
+      // Append the wrapper to the footer
+      footer.append(wrapper);
+    } else {
+      // If it's not <p> or <ul>, just append it to the footer
+      footer.append(child);
+    }
+  }
 
   block.append(footer);
 }
