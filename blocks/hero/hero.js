@@ -7,11 +7,10 @@ export default function decorate(block) {
             const data = await response.json();
             
             // Extract area of study and class preference data from the fetched todos (simulate)
-            const areaOfStudyData = data.todos.map(todo => ({
-              console.log(todo)
-                //value: Select Area of Study,
-                //label: todo.todo
-            }));
+          const areaOfStudyData = data["Select Area of Study"].map(area => ({
+            value: area.toLowerCase().replace(/\s+/g, '-'), // Convert area name to a suitable value (e.g., lowercase with hyphens)
+            label: area // Use the area name as the label
+        }))
  
             const classPreferenceData = [
                 { value: 'online', label: 'Online' },
