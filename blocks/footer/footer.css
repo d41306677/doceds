@@ -1,75 +1,53 @@
-/* Footer Styles */
-footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
-}
+import { getMetadata } from '../../scripts/aem.js';
+import { loadFragment } from '../fragment/fragment.js';
 
-.footer-container {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
-}
+/**
+ * loads and decorates the footer
+ * @param {Element} block The footer block element
+ */
+export default async function decorate(block) {
+  // Load footer as fragment
+  const footerMeta = getMetadata('footer');
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const fragment = await loadFragment(footerPath);
 
-footer .footer-container p {
-  margin: 0;
-}
+  // Clear the block and create a new footer container
+  block.textContent = '';
+  const footer = document.createElement('div');
+  footer.classList.add('footer-container'); // Added class for future styling
 
-/* General Styles */
-.tabs-panel {
-  padding: 20px;
-}
+  // Initialize a temporary container for wrapping
+  let wrapper = null;
 
-/* Remove bullet points from lists */
-.tabs-panel ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0; /* Remove margin for better alignment */
-}
+  // Loop through the fragment children
+  while (fragment.firstElementChild) {
+    const child = fragment.firstElementChild;
 
-/* Headings */
-.tabs-panel p {
-  font-size: 1.2rem;
-  margin: 10px 0 0; /* Margin to separate from the list */
-  font-weight: bold;
-}
+    // Check if the child is a <p> or <ul> element
+    if (child.tagName === 'P' || child.tagName === 'UL') {
+      // If we're at the start of a new block, create a new wrapper
+      if (!wrapper) {
+        wrapper = document.createElement('div');
+        wrapper.classList.add('degree-program-block');
+      }
 
-/* Flexbox for block pairing without changing HTML structure */
-.degree-program-block {
-  display: flex; /* Use flexbox for layout */
-  align-items: flex-start; /* Align items to the top */
-  margin-bottom: 20px; /* Space between each block */
-  padding: 10px; /* Padding inside each block */
-  border: 1px solid #ccc; /* Optional border for visibility */
-  border-radius: 5px; /* Optional rounded corners */
-}
+      // Append the <p> or <ul> to the wrapper
+      wrapper.append(child);
+    }
 
-/* Ensure <p> and <ul> sit next to each other */
-.degree-program-block p {
-  margin: 0; /* Reset margin for <p> inside the block */
-}
-
-/* Make sure to have some space between the heading and the list */
-.degree-program-block p + ul {
-  margin-left: 10px; /* Space between heading and list */
-}
-
-/* Responsive Styles */
-@media (max-width: 767px) {
-  .tabs-panel {
-    display: block; /* Stack elements vertically on small screens */
+    // If we encounter an element that's neither <p> nor <ul>, it indicates the end of a block
+    if (child.tagName !== 'P' && child.tagName !== 'UL' && wrapper) {
+      // Append the wrapped block to the footer
+      footer.append(wrapper);
+      wrapper = null; // Reset wrapper for the next block
+      footer.append(child); // Append the current child if not <p> or <ul>
+    }
   }
 
-  .degree-program-block {
-    display: block; /* Stack the heading and list in one block */
+  // If there's an unappended wrapper at the end, append it
+  if (wrapper) {
+    footer.append(wrapper);
   }
 
-  .tabs-panel p,
-  .tabs-panel ul {
-    display: block; /* Ensure each element takes full width */
-    margin: 0; /* Remove margin for mobile layout */
-  }
-
-  .tabs-panel ul {
-    margin-top: 10px; /* Add space above the list on mobile */
-  }
+  block.append(footer);
 }
