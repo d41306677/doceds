@@ -1,3 +1,4 @@
+/* Footer Styles */
 footer {
   background-color: var(--light-color);
   font-size: var(--body-font-size-xs);
@@ -13,21 +14,25 @@ footer .footer p {
   margin: 0;
 }
 
-@media (width >= 900px) {
+@media (min-width: 900px) {
   footer .footer > div {
     padding: 40px 32px 24px;
   }
 }
+
+/* Degrees & Programs Section */
 /* General Styles */
 #degrees-programs {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  padding: 20px;
 }
 
 #degrees-programs h5 {
   font-size: 1.2rem;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 #degrees-programs ul {
@@ -43,20 +48,21 @@ footer .footer p {
 @media (min-width: 768px) {
   #degrees-programs {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns for first row */
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for the first row */
     gap: 20px;
   }
-  /* Target the first 3 headings for the first row */
+
+  /* First row with 3 columns: Degree Level, Business, Healthcare */
   #degrees-programs h5:nth-child(-n+3) {
     grid-column: span 1;
   }
 
-  /* Next 2 headings in the second row */
+  /* Second row with 2 columns: Technology, Keller Graduate */
   #degrees-programs h5:nth-child(n+4) {
     grid-column: span 1;
   }
-  
-  /* Style for unordered list */
+
+  /* Ensure that unordered lists align with the headings */
   #degrees-programs ul {
     margin-top: 10px;
   }
