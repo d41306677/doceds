@@ -13,6 +13,7 @@ footer .footer > div {
 footer .footer p {
   margin: 0;
 }
+
 /* General Styles */
 .tabs-panel {
   padding: 20px;
@@ -33,13 +34,22 @@ footer .footer p {
 }
 
 /* Flexbox for block pairing without changing HTML structure */
-.tabs-panel p, .tabs-panel ul {
-  display: inline-block; /* Allow both elements to sit next to each other */
-  vertical-align: top; /* Align them to the top */
+.degree-program-block {
+  display: flex; /* Use flexbox for layout */
+  align-items: flex-start; /* Align items to the top */
+  margin-bottom: 20px; /* Space between each block */
+  padding: 10px; /* Padding inside each block */
+  border: 1px solid #ccc; /* Optional border for visibility */
+  border-radius: 5px; /* Optional rounded corners */
 }
 
-/* Make each pair a block */
-.tabs-panel p + ul {
+/* Ensure <p> and <ul> sit next to each other */
+.degree-program-block p {
+  margin: 0; /* Reset margin for <p> inside the block */
+}
+
+/* Make sure to have some space between the heading and the list */
+.degree-program-block p + ul {
   margin-left: 10px; /* Space between heading and list */
 }
 
@@ -47,6 +57,10 @@ footer .footer p {
 @media (max-width: 767px) {
   .tabs-panel {
     display: block; /* Stack elements vertically on small screens */
+  }
+
+  .degree-program-block {
+    display: block; /* Stack the heading and list in one block */
   }
 
   .tabs-panel p,
