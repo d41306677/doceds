@@ -37,29 +37,25 @@ footer .footer p {
 
 /* Desktop Layout */
 @media (min-width: 768px) {
-  /* Create grid layout for the first row with 3 columns */
+  /* Create a flexbox layout to align the headings and lists in a row */
   .tabs-panel {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+    gap: 20px; /* Space between blocks */
   }
 
-  /* First row with "By Degree Level", "Business", "Healthcare" */
-  .tabs-panel p:nth-of-type(1),
-  .tabs-panel p:nth-of-type(2),
-  .tabs-panel p:nth-of-type(3) {
-    grid-column: span 1;
-  }
-
-  /* Second row with "Technology" and "Keller Graduate School" */
-  .tabs-panel p:nth-of-type(4),
-  .tabs-panel p:nth-of-type(5) {
-    grid-column: span 1;
-  }
-
-  /* Ensure the corresponding ul aligns under each heading */
+  /* Style each p and ul as flex items, ensuring they are aligned next to each other */
+  .tabs-panel p,
   .tabs-panel ul {
-    margin-top: 10px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+  }
+
+  /* Flex item behavior for each heading and list */
+  .tabs-panel > * {
+    flex: 1 1 30%; /* Ensure each block takes 30% of the width, with space to wrap */
+    min-width: 200px; /* Prevent the items from becoming too narrow */
   }
 }
 
@@ -67,15 +63,14 @@ footer .footer p {
 @media (max-width: 767px) {
   /* Stack everything vertically */
   .tabs-panel {
-    display: flex;
-    flex-direction: column;
+    display: block;
   }
 
   .tabs-panel p {
     margin-bottom: 15px;
   }
 
-  /* Make sure each section takes full width on mobile */
+  /* Ensure each section takes full width on mobile */
   .tabs-panel p,
   .tabs-panel ul {
     width: 100%;
