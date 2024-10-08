@@ -22,57 +22,40 @@ footer .footer p {
 .tabs-panel ul {
   list-style-type: none;
   padding: 0;
-}
-
-.tabs-panel ul li {
-  margin-bottom: 8px;
+  margin: 0; /* Remove margin for better alignment */
 }
 
 /* Headings */
 .tabs-panel p {
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  margin: 10px 0 0; /* Margin to separate from the list */
   font-weight: bold;
 }
 
-/* Desktop Layout */
-@media (min-width: 768px) {
-  /* Create a flexbox layout to align the headings and lists in a row */
-  .tabs-panel {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next row */
-    gap: 20px; /* Space between blocks */
-  }
-
-  /* Style each p and ul as flex items, ensuring they are aligned next to each other */
-  .tabs-panel p,
-  .tabs-panel ul {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0;
-  }
-
-  /* Flex item behavior for each heading and list */
-  .tabs-panel > * {
-    flex: 1 1 30%; /* Ensure each block takes 30% of the width, with space to wrap */
-    min-width: 200px; /* Prevent the items from becoming too narrow */
-  }
+/* Flexbox for block pairing without changing HTML structure */
+.tabs-panel p, .tabs-panel ul {
+  display: inline-block; /* Allow both elements to sit next to each other */
+  vertical-align: top; /* Align them to the top */
 }
 
-/* Mobile Layout */
+/* Make each pair a block */
+.tabs-panel p + ul {
+  margin-left: 10px; /* Space between heading and list */
+}
+
+/* Responsive Styles */
 @media (max-width: 767px) {
-  /* Stack everything vertically */
   .tabs-panel {
-    display: block;
+    display: block; /* Stack elements vertically on small screens */
   }
 
-  .tabs-panel p {
-    margin-bottom: 15px;
-  }
-
-  /* Ensure each section takes full width on mobile */
   .tabs-panel p,
   .tabs-panel ul {
-    width: 100%;
+    display: block; /* Ensure each element takes full width */
+    margin: 0; /* Remove margin for mobile layout */
+  }
+
+  .tabs-panel ul {
+    margin-top: 10px; /* Add space above the list on mobile */
   }
 }
