@@ -14,6 +14,7 @@ export default async function decorate(block) {
 
   // decorate footer DOM
   const hrtag = document.createElement('hr');
+  hrtag.className="hrtag";
   block.textContent = '';
   block.append(hrtag)
   const footer = document.createElement('div');
