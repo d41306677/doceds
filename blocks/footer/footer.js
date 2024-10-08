@@ -19,7 +19,7 @@ export default async function decorate(block) {
   block.append(footer);
 
    // Select the target element you want to replace
-const targetElement = document.querySelector('.default-content-wrapper');
+const targetElement = document.querySelector('.footer-wrapper');
  
 // Create a new div element
 const newDiv = document.createElement('div');
