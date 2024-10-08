@@ -8,8 +8,9 @@ export default function decorate(block) {
             
             // Extract area of study and class preference data from the fetched todos (simulate)
             const areaOfStudyData = data.todos.map(todo => ({
-                value: todo.id,
-                label: todo.todo
+              console.log(todo)
+                //value: Select Area of Study,
+                //label: todo.todo
             }));
  
             const classPreferenceData = [
