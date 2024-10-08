@@ -2,42 +2,29 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
-
 .container {
   display: flex;
   height: 100vh;
   position: relative;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
-
 .form-container {
   width: 30%;
   padding: 50px;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-  background-color: #f0a94d;
 }
-
 .form-container h2 {
   margin-bottom: 20px;
 }
-
 .form-container label {
   display: block;
   margin-bottom: 5px;
 }
-
 .form-container select {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
 }
-
 .form-container button {
   padding: 10px 20px;
   background-color: #007BFF;
@@ -45,11 +32,9 @@ body {
   border: none;
   cursor: pointer;
 }
-
 .form-container button:hover {
   background-color: #0056b3;
 }
-
 .image-container {
   width: 60%;
   background-image: url('https://www.devry.edu/content/dam/devry_edu/images/hero/hero-homepage-large.jpg');
@@ -57,35 +42,12 @@ body {
   background-position: center;
   position: relative;
 }
-
-/* Responsive Styles */
-@media (max-width: 1024px) {
-  .form-container {
-    width: 40%; /* Adjust form width for tablet */
-  }
-
-  .image-container {
-    width: 60%; /* Keep image width for tablet */
-  }
-}
-
-@media (max-width: 767px) {
-  .container {
-    flex-direction: column; /* Stack elements vertically on mobile */
-    height: auto; /* Allow height to adjust based on content */
-  }
-
-  .form-container {
-    width: 100%; /* Full width for mobile */
-    position: static; /* Remove absolute positioning */
-    transform: none; /* Remove transform */
-    padding: 20px;
-    box-shadow: none; /* Remove box-shadow for mobile */
-  }
-
-  .image-container {
-    width: 100%; /* Image also takes full width on mobile */
-    height: 200px; /* Adjust height for mobile */
-    background-size: cover;
-  }
+.form-container {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: #f0a94d;
 }
