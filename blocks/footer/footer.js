@@ -6,36 +6,49 @@ import { loadFragment } from '../fragment/fragment.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // Load footer as fragment
-  const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const fragment = await loadFragment(footerPath);
+    // Load footer as fragment
+    const footerMeta = getMetadata('footer');
+    const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+    const fragment = await loadFragment(footerPath);
 
-  // Clear the block and create a new footer container
-  block.textContent = '';
-  const footer = document.createElement('div');
-  footer.classList.add('footer-container'); // Added class for future styling
+    // Clear the block
+    block.textContent = '';
+    const footer = document.createElement('div');
+    footer.classList.add('footer-container'); // Added class for future styling
 
-  // Loop through the fragment children
-  while (fragment.firstElementChild) {
-    const child = fragment.firstElementChild;
+    // Initialize a temporary container for wrapping
+    let wrapper = null;
 
-    // Check if the child is a <p> or <ul> element
-    if (child.tagName === 'P' || child.tagName === 'UL') {
-      // Create a new wrapper <div> with the class 'degree-program-block'
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('degree-program-block');
+    // Loop through the fragment children
+    while (fragment.firstElementChild) {
+        const child = fragment.firstElementChild;
 
-      // Append the <p> or <ul> to the wrapper
-      wrapper.append(child);
-      
-      // Append the wrapper to the footer
-      footer.append(wrapper);
-    } else {
-      // If it's not <p> or <ul>, just append it to the footer
-      footer.append(child);
+        // Check if the child is a <p> or <ul> element
+        if (child.tagName === 'P' || child.tagName === 'UL') {
+            // If we're at the start of a new block, create a new wrapper
+            if (!wrapper) {
+                wrapper = document.createElement('div');
+                wrapper.classList.add('degree-program-block'); // Assign class here
+            }
+
+            // Append the <p> or <ul> to the wrapper
+            wrapper.append(child);
+        }
+
+        // If we encounter an element that's neither <p> nor <ul>, it indicates the end of a block
+        if (child.tagName !== 'P' && child.tagName !== 'UL' && wrapper) {
+            // Append the wrapped block to the footer
+            footer.append(wrapper);
+            wrapper = null; // Reset wrapper for the next block
+            footer.append(child); // Append the current child if not <p> or <ul>
+        }
     }
-  }
 
-  block.append(footer);
+    // If there's an unappended wrapper at the end, append it
+    if (wrapper) {
+        footer.append(wrapper);
+    }
+
+    // Append the footer to the block
+    block.append(footer);
 }
