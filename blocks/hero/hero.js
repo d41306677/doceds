@@ -3,7 +3,7 @@ export default function decorate(block) {
     async function fetchDropdownData() {
         try {
             // Fetch the JSON response
-            const response = await fetch('https://dummyjson.com/todos');
+            const response = await fetch('https://main--doceds--d41306677.aem.page/blocks/hero/hero.json');
             const data = await response.json();
             
             // Extract area of study and class preference data from the fetched todos (simulate)
