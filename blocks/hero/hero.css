@@ -7,11 +7,17 @@ body {
   display: flex;
   height: 100vh;
   position: relative;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute space between form and image */
 }
+
 .hero-wrapper {
-    background-color: #373737;
+  background-color: #373737;
+  width: 100%; /* Ensure the wrapper takes the full width */
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
 }
+
 .form-container {
   width: 30%;
   padding: 10px;
@@ -19,9 +25,6 @@ body {
   background-color: #fec221;
   border-radius: 9pt;
   z-index: 1;
-  position: absolute; /* Keep it absolute */
-  left: 0;
-  top: var(--nav-height); /* Ensure it's below the fixed header */
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -38,14 +41,16 @@ body {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; /* Show ellipsis for long text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .form-container select option {
-  white-space: normal; /* Allow wrapping for options in the dropdown */
-  word-wrap: break-word; /* Break long words if needed */
+  white-space: normal;
+  word-wrap: break-word;
 }
+
 .form-container button {
   padding: 10px 20px;
   background-color: #007BFF;
@@ -59,45 +64,43 @@ body {
 }
 
 .image-container {
- width: 60%;
-  background-image: url('https://www.devry.edu/content/dam/devry_edu/images/hero/hero-homepage-large.jpg');
+  width: 60%;
   background-size: cover;
   background-position: center;
-  position: relative; /* Keeps the form-container inside it */
-  height: 100vh; /* Ensures image fills the full height */
+  height: 100vh;
+  position: relative;
+  background-image: url('https://www.devry.edu/content/dam/devry_edu/images/hero/hero-homepage-large.jpg');
+  border-radius: 9pt;
 }
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
-.form-container {
+  .form-container {
     width: 40%;
-    top: var(--nav-height); /* Adjust based on header height */
+    margin-left: 20px; /* Adjust margin for smaller screens */
   }
 
   .image-container {
-    width: 60%;
+    width: 55%;
   }
 }
 
 @media (max-width: 767px) {
- container {
+  .container {
     flex-direction: column;
     height: auto;
   }
 
   .form-container {
-    width: 90%; /* Full width for mobile */
-    position: static; /* Set to static to make it flow below the banner */
-    top: auto; /* Remove top positioning */
+    width: 90%;
+    margin: 10px auto;
     padding: 20px;
-    margin-top: 20px; /* Add some spacing below the banner */
-    box-shadow: none; /* Remove box-shadow for mobile */
-    margin: 10px 0px;
+    box-shadow: none;
   }
 
   .image-container {
     width: 100%;
-    height: 200px; /* Adjust height for mobile */
+    height: 200px;
     background-size: cover;
   }
 }
