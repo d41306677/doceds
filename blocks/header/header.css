@@ -125,7 +125,7 @@ header nav .nav-hamburger {
 
 @media (max-width: 767px) {
   header nav {
-    flex-direction: column; /* Change to column for mobile layout */
+    flex-direction: row; /* Change to column for mobile layout */
     align-items: flex-start; /* Align items to the start */
     padding: 10px;
   }
@@ -179,6 +179,8 @@ header nav[aria-expanded="true"] .nav-sections {
 header nav .nav-hamburger button {
   background: none;
   border: none;
+    margin: 0px !important;
+    padding: 4px 20px;
 }
 
 header nav .nav-hamburger button:focus {
