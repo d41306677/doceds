@@ -10,7 +10,7 @@ body {
   flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 .hero-wrapper {
-    background-color: #c91f1f;
+    background-color: #373737;
 }
 .form-container {
   width: 30%;
