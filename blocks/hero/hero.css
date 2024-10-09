@@ -15,10 +15,8 @@ body {
   padding: 50px;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative; /* Changed to relative */
+  margin-top: var(--nav-height); /* Adjust margin to match header height */
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   background-color: #f0a94d;
 }
@@ -68,10 +66,11 @@ body {
 @media (max-width: 1024px) {
   .form-container {
     width: 40%; /* Adjust form width for tablet */
+    margin-top: var(--nav-height); /* Adjust based on header height */
   }
 
   .image-container {
-    width: 60%; /* Keep image width for tablet */
+    width: 60%;
   }
 }
 
@@ -81,17 +80,17 @@ body {
     height: auto; /* Allow height to adjust based on content */
   }
 
-  .form-container {
+ .form-container {
     width: 100%; /* Full width for mobile */
-    position: static; /* Remove absolute positioning */
-    transform: none; /* Remove transform */
+    position: relative; /* Keep position relative */
+    margin-top: 0;
     padding: 20px;
-    box-shadow: none; /* Remove box-shadow for mobile */
+    box-shadow: none;
   }
 
   .image-container {
-    width: 100%; /* Image also takes full width on mobile */
-    height: 200px; /* Adjust height for mobile */
+    width: 100%; /* Full width for mobile */
+    height: 200px;
     background-size: cover;
   }
 }
