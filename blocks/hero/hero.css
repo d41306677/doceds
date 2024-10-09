@@ -12,14 +12,15 @@ body {
 
 .form-container {
   width: 30%;
-  padding: 50px;
-  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  margin: 53px 61px 26px 78px;
+  background-color: #fec221;
+  border-radius: 9pt;
   z-index: 1;
   position: absolute; /* Keep it absolute */
   left: 0;
   top: var(--nav-height); /* Ensure it's below the fixed header */
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-  background-color: #f0a94d;
 }
 
 .form-container h2 {
