@@ -33,19 +33,6 @@ newDiv.appendChild(newImage);
   block.append(hrtag)
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
-
-  const newDiv = document.createElement('div');
-newDiv.className = 'default-content-wrapper';
- 
-// Create a new img element for the SVG
-const newImage = document.createElement('img');
-newImage.className ="logo"
-newImage.src = 'https://www.devry.edu/content/dam/devry_edu/svg/graphics/outlined/devry-edu/headerlogos/large/Header-Logo-DeVryEdu-Large.svg';
-newImage.alt = 'DeVry University Logo';
-newImage.style.width = '240px'; // Adjust the width as per your needs
- 
-// Append the p and img elements to the div
-newDiv.appendChild(newImage);
   block.append(newDiv);
 
   block.append(footer);
