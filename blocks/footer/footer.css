@@ -4,11 +4,16 @@ footer {
   font-size: var(--body-font-size-xs);
   color: #ffffff;
 }
-
+.footer.block {
+    padding-top: 40px;
+}
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
   padding: 40px 24px 24px;
+}
+footer.footer-wrapper {
+    position: relative;
 }
 .default-content-wrapper p {
     color: hsla(0, 0%, 100%, .6);
@@ -112,8 +117,16 @@ footer .footer p {
 }
 
 .hrtag {
-    border: 0; /* Remove default border */
-    height: 2px; /* Set the height of the hr */
-    background-color: #f0c91f; /* Set the color of the hr */
-    margin: 50px 0; /* Add margin for spacing */
+    border: 0;
+    width: 100%;
+    border: none;
+    border-top: 2px solid #f0c91f;
+    margin: 0 auto;
+    margin-top: 20px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
 }
