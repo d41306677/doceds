@@ -84,7 +84,7 @@ body {
   }
 
   .form-container {
-    width: 100%; /* Full width for mobile */
+    width: 90%; /* Full width for mobile */
     position: static; /* Set to static to make it flow below the banner */
     top: auto; /* Remove top positioning */
     padding: 20px;
