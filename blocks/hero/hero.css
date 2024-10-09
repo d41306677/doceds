@@ -90,6 +90,7 @@ body {
     padding: 20px;
     margin-top: 20px; /* Add some spacing below the banner */
     box-shadow: none; /* Remove box-shadow for mobile */
+    margin: 10px 0px;
   }
 
   .image-container {
