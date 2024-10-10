@@ -54,3 +54,7 @@
 .selectdropdown-content li:hover {
     background-color: #f0f0f0; /* Hover effect */
 }
+
+.news-filter-showmore {
+    display:none;
+}
