@@ -126,6 +126,11 @@ export default async function createNewsFilter(block) {
 
         const newsCardTileText = document.createElement('div');
         newsCardTileText.className = 'news-filter-card-tile-text';
+        newsCardTitlePreTitle = document.createElement('div');
+        newsCardTitlePreTitle.className = "news-filter-card-pretitle";
+        newsCardTitleDiv = document.createElement('div');
+        newsCardTitleDiv.className = 'news-filter-card-tile';
+
         const newsCardTitle = document.createElement('h6');
         newsCardTitle.innerText = article.title;
         const newsCardDescription = document.createElement('p');
@@ -136,9 +141,11 @@ export default async function createNewsFilter(block) {
         newsCardLink.setAttribute('aria-label', article.title);
         newsCardLink.innerText = 'Read Story';
 
-        newsCardTileText.appendChild(newsCardTitle);
-        newsCardTileText.appendChild(newsCardDescription);
-        newsCardTileText.appendChild(newsCardLink);
+        newsCardTileText.appendChild(newsCardTitlePreTitle);
+        newsCardTileText.appendChild(newsCardTitleDiv);
+        newsCardTitleDiv.appendChild(newsCardTitle);
+        newsCardTitleDiv.appendChild(newsCardDescription);
+        newsCardTitleDiv.appendChild(newsCardLink);
         newsCardContent.appendChild(newsCardImg);
         newsCardContent.appendChild(newsCardTileText);
         newsCardResults.appendChild(newsCardContent);
