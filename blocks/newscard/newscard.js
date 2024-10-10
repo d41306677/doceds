@@ -28,7 +28,7 @@ export default async function createNewsFilter(block) {
     // Add title
     const newsFilterTitle = document.createElement('div');
     newsFilterTitle.className = 'news-filter-title';
-    newsFilterTitle.innerText = '2024 News Articles';
+    newsFilterTitle.innerText = 'News Articles';
 
     // Add separator
     const newsFilterSeparator = document.createElement('div');
@@ -49,7 +49,7 @@ export default async function createNewsFilter(block) {
     yearSelect.name = 'year';
 
     // Array of years for dropdown options
-    const years = ['2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011'];
+    const years = ['2024', '2023', '2022', '2021', '2020', '2019', '2018'];
 
     // Create dropdown options
     years.forEach((year) => {
@@ -75,80 +75,78 @@ export default async function createNewsFilter(block) {
     newsFilterContainer.appendChild(yearSelect);
     newsFilterContainer.appendChild(viewButton);
 
-    // Create the results section and add news cards
+    // Create the results section
     const newsCardResults = document.createElement('div');
     newsCardResults.className = 'news-card-results';
 
-    // Example news articles data
-    const newsArticles = [
-        {
-            imgSrc: 'https://www.devry.edu/content/dam/devry_edu/newsroom/news-women-ai-440.jpg',
-            title: 'Learning in an AI Era: Equipping Women for Success Amid Gender Disparities',
-            description: 'Despite significant positive momentum over the past century, women across all business sectors continue to face several gender-based challenges, often preventing them from reaching their upmost potential and earnings in the modern workplace.',
-            link: 'https://www.devry.edu/newsroom/news/2024/learning-in-an-ai-era-equipping-women-for-success-amid-gender-disparities.html'
-        },
-        {
-            imgSrc: 'https://www.devry.edu/content/dam/devry_edu/newsroom/upskilling-mat-release-440.png',
-            title: '3 Things to Know About Learning AI for Career Advancement',
-            description: 'Artificial intelligence (AI) undeniably continues to shape the workplace. Companies across the globe are navigating how to integrate AI into their business operations and strategies - making it increasingly paramount for professionals to keep pace with these modern tech advancements.',
-            link: 'https://www.devry.edu/newsroom/news/2024/3-things-to-know-about-learning-ai-for-career-advancement.html'
-        },
-        {
-            imgSrc: 'https://www.devry.edu/content/dam/devry_edu/newsroom/newsroom-article-2-upskilling-2024-440x440.jpg',
-            title: 'AI Skills Development: How Employers Can Lean in with the Right Training',
-            description: 'The modern workplace and business landscape continues to face swift transformation with the increasing prominence of artificial intelligence (AI).',
-            link: 'https://www.devry.edu/newsroom/news/2024/ai-skills-development-how-employers-can-lean-in-with-the-right-training.html'
+    // Fetch news articles data from the API
+    let newsArticlesByYear = {};
+
+    async function fetchNewsData() {
+        try {
+            const response = await fetch('https://main--doceds--d41306677.aem.page/blocks/newscard/newscardapi.json');
+            const data = await response.json();
+
+            // Group articles by year
+            newsArticlesByYear = data.reduce((acc, article) => {
+                const year = new Date(article.date).getFullYear().toString();
+                if (!acc[year]) {
+                    acc[year] = [];
+                }
+                acc[year].push({
+                    imgSrc: article.imgSrc,
+                    title: article.title,
+                    description: article.description,
+                    link: article.link
+                });
+                return acc;
+            }, {});
+
+            // Render initial year's articles (default to 2024)
+            renderNewsArticles('2024');
+        } catch (error) {
+            console.error('Error fetching news data:', error);
         }
-    ];
+    }
 
-    // Create news cards
-    newsArticles.forEach(article => {
-        const newsCardContent = document.createElement('div');
-        newsCardContent.className = 'news-filter-card-content';
+    // Function to render news articles for the selected year
+    function renderNewsArticles(year) {
+        newsCardResults.innerHTML = ''; // Clear previous results
+        const articles = newsArticlesByYear[year] || [];
+        articles.forEach(article => {
+            const newsCardContent = document.createElement('div');
+            newsCardContent.className = 'news-filter-card-content';
 
-        const newsCardImg = document.createElement('div');
-        newsCardImg.className = 'news-filter-card-img';
-        const responsiveImage = document.createElement('div');
-        responsiveImage.className = 'responsive-image';
-        const responsiveImageContainer = document.createElement('div');
-        responsiveImageContainer.className = 'responsive-image-container';
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'image-container';
-        const img = document.createElement('img');
-        img.src = article.imgSrc;
-        img.className = 'responsive-img';
-        img.alt = '';
+            const newsCardImg = document.createElement('div');
+            newsCardImg.className = 'news-filter-card-img';
+            const img = document.createElement('img');
+            img.src = article.imgSrc;
+            img.className = 'responsive-img';
+            img.alt = '';
 
-        imageContainer.appendChild(img);
-        responsiveImageContainer.appendChild(imageContainer);
-        responsiveImage.appendChild(responsiveImageContainer);
-        newsCardImg.appendChild(responsiveImage);
+            const newsCardTileText = document.createElement('div');
+            newsCardTileText.className = 'news-filter-card-tile-text';
+            const newsCardTitle = document.createElement('h6');
+            newsCardTitle.innerText = article.title;
+            const newsCardDescription = document.createElement('p');
+            newsCardDescription.innerText = article.description;
+            const newsCardLink = document.createElement('a');
+            newsCardLink.href = article.link;
+            newsCardLink.innerText = 'Read Story';
 
-        const newsCardTileText = document.createElement('div');
-        newsCardTileText.className = 'news-filter-card-tile-text';
-        const newsCardTitlePreTitle = document.createElement('div');
-        newsCardTitlePreTitle.className = "news-filter-card-pretitle";
-        const newsCardTitleDiv = document.createElement('div');
-        newsCardTitleDiv.className = 'news-filter-card-tile';
+            newsCardTileText.appendChild(newsCardTitle);
+            newsCardTileText.appendChild(newsCardDescription);
+            newsCardTileText.appendChild(newsCardLink);
+            newsCardContent.appendChild(newsCardImg);
+            newsCardContent.appendChild(newsCardTileText);
+            newsCardResults.appendChild(newsCardContent);
+        });
+    }
 
-        const newsCardTitle = document.createElement('h6');
-        newsCardTitle.innerText = article.title;
-        const newsCardDescription = document.createElement('p');
-        newsCardDescription.innerText = article.description;
-        const newsCardLink = document.createElement('a');
-        newsCardLink.className = 'news-filter-card-link';
-        newsCardLink.href = article.link;
-        newsCardLink.setAttribute('aria-label', article.title);
-        newsCardLink.innerText = 'Read Story';
-
-        newsCardTileText.appendChild(newsCardTitlePreTitle);
-        newsCardTileText.appendChild(newsCardTitleDiv);
-        newsCardTitleDiv.appendChild(newsCardTitle);
-        newsCardTitleDiv.appendChild(newsCardDescription);
-        newsCardTitleDiv.appendChild(newsCardLink);
-        newsCardContent.appendChild(newsCardImg);
-        newsCardContent.appendChild(newsCardTileText);
-        newsCardResults.appendChild(newsCardContent);
+    // Event listener to handle the year selection and render news articles
+    viewButton.addEventListener('click', () => {
+        const selectedYear = yearSelect.value;
+        renderNewsArticles(selectedYear);
     });
 
     // Create show more link
@@ -187,4 +185,7 @@ export default async function createNewsFilter(block) {
 
     // Append the entire newsFilter to the block
     block.appendChild(newsFilter);
+
+    // Fetch news data and initialize the articles display
+    await fetchNewsData();
 }
