@@ -1,4 +1,13 @@
+
+ import { h, render } from 'https://esm.sh/preact';
+
+  // Create your app
+  
+
 export default async function createNewsFilter(block) {
+  const app = h('h1', null, 'Hello World!');
+
+  render(app, document.body);
     // Create the news filter wrapper div
     const newsFilter = document.createElement('div');
     newsFilter.className = 'news-filter';
