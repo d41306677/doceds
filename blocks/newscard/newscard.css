@@ -55,6 +55,14 @@
     background-color: #f0f0f0; /* Hover effect */
 }
 
+@media (min-width: 1024px) {
+  .news-filter {
+    width: 60%;
+    margin-left: 0; /* Aligns the content to the left */
+  }
+}
+
+
 .news-filter-showmore {
     display:none;
 }
