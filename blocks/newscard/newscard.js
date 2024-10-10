@@ -82,32 +82,38 @@ export default async function createNewsFilter(block) {
     // Fetch news articles data from the API
     let newsArticlesByYear = {};
 
-    async function fetchNewsData() {
-        try {
-            const response = await fetch('https://main--doceds--d41306677.aem.page/blocks/newscard/newscardapi.json');
-            const data = await response.json();
+   async function fetchNewsData() {
+    try {
+        const response = await fetch('https://main--doceds--d41306677.aem.page/blocks/newscard/newscardapi.json');
+        const data = await response.json();
 
-            // Group articles by year
-            newsArticlesByYear = data.reduce((acc, article) => {
-                const year = new Date(article.date).getFullYear().toString();
-                if (!acc[year]) {
-                    acc[year] = [];
-                }
-                acc[year].push({
-                    imgSrc: article.imgSrc,
-                    title: article.title,
-                    description: article.description,
-                    link: article.link
-                });
-                return acc;
-            }, {});
+        console.log('Fetched Data:', data); // Log the fetched data for inspection
 
-            // Render initial year's articles (default to 2024)
-            renderNewsArticles('2024');
-        } catch (error) {
-            console.error('Error fetching news data:', error);
-        }
+        // Check if data is an object, if so, access the relevant property (modify based on response structure)
+        const articlesArray = Array.isArray(data) ? data : data.articles || [];
+
+        // Group articles by year
+        newsArticlesByYear = articlesArray.reduce((acc, article) => {
+            const year = new Date(article.date).getFullYear().toString();
+            if (!acc[year]) {
+                acc[year] = [];
+            }
+            acc[year].push({
+                imgSrc: article.imgSrc,
+                title: article.title,
+                description: article.description,
+                link: article.link
+            });
+            return acc;
+        }, {});
+
+        // Render initial year's articles (default to 2024)
+        renderNewsArticles('2024');
+    } catch (error) {
+        console.error('Error fetching news data:', error);
     }
+}
+
 
     // Function to render news articles for the selected year
     function renderNewsArticles(year) {
