@@ -1,10 +1,4 @@
-
-
-  
-
 export default async function createNewsFilter(block) {
-
-  render(app, document.body);
     // Create the news filter wrapper div
     const newsFilter = document.createElement('div');
     newsFilter.className = 'news-filter';
