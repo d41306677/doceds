@@ -126,9 +126,9 @@ export default async function createNewsFilter(block) {
 
         const newsCardTileText = document.createElement('div');
         newsCardTileText.className = 'news-filter-card-tile-text';
-        newsCardTitlePreTitle = document.createElement('div');
+        const newsCardTitlePreTitle = document.createElement('div');
         newsCardTitlePreTitle.className = "news-filter-card-pretitle";
-        newsCardTitleDiv = document.createElement('div');
+        const newsCardTitleDiv = document.createElement('div');
         newsCardTitleDiv.className = 'news-filter-card-tile';
 
         const newsCardTitle = document.createElement('h6');
