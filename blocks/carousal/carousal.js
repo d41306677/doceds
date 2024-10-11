@@ -1,6 +1,6 @@
 import { h, render } from '../../../scripts/preact.module.js';
-import {htm} from '../../../scripts/htm.js';
-  
+ import htm from 'https://esm.sh/htm'
+
 const html = htm.bind(h);
 
 // Carousel component definition
