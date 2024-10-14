@@ -39,7 +39,7 @@
 .header__submenu {
   display: none; /* Hidden by default */
   position: absolute;
-  top: 100%; /* Positioned below the main menu */
+  top: calc(100% + 2px); /* Adjusted to remove gap between menu and submenu */
   left: 0;
   background-color: #444; /* Dark background for submenu */
   padding: 10px 0;
