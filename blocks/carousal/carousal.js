@@ -1,45 +1,55 @@
-import { h, render } from 'preact.js';
-import htm from 'htm.js';
-
+import { h, render } from 'https://esm.sh/preact';
+import { useState } from 'https://esm.sh/preact/hooks';
+import htm from 'https://esm.sh/htm';
+ 
 const html = htm.bind(h);
-
-// Carousel component definition
-function Carousel({ images }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevSlide = () => {
-    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
-  };
-
-  return html`
-    <div class="carousel-container">
-      <button class="carousel-button prev" onClick=${prevSlide}>
-        &#10094;
-      </button>
-      <div class="carousel-slide">
-        <img src=${images[currentIndex]} alt="Slide ${currentIndex + 1}" />
-      </div>
-      <button class="carousel-button next" onClick=${nextSlide}>
-        &#10095;
-      </button>
-    </div>
-  `;
+ 
+// Carousel Component
+function Carousel({ slides }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+ 
+    // Move to the next slide
+    const nextSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    };
+ 
+    // Move to the previous slide
+    const prevSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
+    };
+ 
+    return html`
+        <div class="carousel">
+            <button onClick=${prevSlide}>Previous</button>
+            
+            <div class="carousel-slide">
+                <h2>${slides[currentIndex].title}</h2>
+                <img src="${slides[currentIndex].image}" alt="${slides[currentIndex].title}" />
+                <p>${slides[currentIndex].description}</p>
+            </div>
+ 
+            <button onClick=${nextSlide}>Next</button>
+        </div>
+    `;
 }
-
-// Export the default `decorate` function which AEM will call
+ 
+// Helper function to simulate fetching dynamic carousel data (e.g., from a URL or API)
+function getCarouselDataFromUrl() {
+    return [
+        { title: "Slide 1", image: "https://via.placeholder.com/400x200", description: "This is the first slide." },
+        { title: "Slide 2", image: "https://via.placeholder.com/400x200", description: "This is the second slide." },
+        { title: "Slide 3", image: "https://via.placeholder.com/400x200", description: "This is the third slide." },
+    ];
+}
+ 
+// Exported async function to decorate a block
 export default async function decorate(block) {
-  // Define the image array (could be dynamic)
-  const images = [
-    'https://via.placeholder.com/600x300?text=Slide+1',
-    'https://via.placeholder.com/600x300?text=Slide+2',
-    'https://via.placeholder.com/600x300?text=Slide+3',
-  ];
-
-  // Render the Carousel component
-  const app = html`<${Carousel} images=${images} />`;
-  render(app, block);
+    // Fetch the dynamic slides data
+    const slides = getCarouselDataFromUrl();
+ 
+    // Create the carousel component with dynamic slides
+    const app = html`<${Carousel} slides=${slides} />`;
+ 
+    // Render the carousel component inside the provided block
+    render(app, block);
 }
