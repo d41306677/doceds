@@ -49,10 +49,10 @@ function Header({ title }) {
       <div class="header__logo">
         <h1 class="header__title">${title}</h1>
       </div>
-       <button class="header__hamburger" onClick=${toggleMenu}>
+      <button class="header__hamburger" onClick=${toggleMenu}>
         ☰ <!-- Hamburger icon -->
       </button>
-      <nav class="header__nav">
+      <nav class="header__navigation">
         <ul class=${`header__menu ${menuActive ? 'active' : ''}`}>
           ${menuItems.map(
             (item) => html`
