@@ -80,4 +80,6 @@
   .header__hamburger {
     display: block; /* Show hamburger icon on mobile */
   }
-}
+
+  .header__menu-item {
+    margin: 10px 0; /* Adjust margin for stac
