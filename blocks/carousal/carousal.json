@@ -1,6 +1,33 @@
-[
+/*[
   { "label": "Home", "url": "/home" },
   { "label": "About", "url": "/about" },
   { "label": "Services", "url": "/services" },
   { "label": "Contact", "url": "/contact" }
+] */
+[
+  { 
+    "label": "Home", 
+    "url": "/home" 
+  },
+  { 
+    "label": "About", 
+    "url": "/about",
+    "submenu": [
+      { "label": "Team", "url": "/about/team" },
+      { "label": "Careers", "url": "/about/careers" }
+    ]
+  },
+  { 
+    "label": "Services", 
+    "url": "/services",
+    "submenu": [
+      { "label": "Consulting", "url": "/services/consulting" },
+      { "label": "Development", "url": "/services/development" },
+      { "label": "Support", "url": "/services/support" }
+    ]
+  },
+  { 
+    "label": "Contact", 
+    "url": "/contact" 
+  }
 ]
