@@ -1,11 +1,11 @@
-import { h, render } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
-import htm from 'htm';
+import { h, render } from 'https://esm.sh/preact';
+import { useState } from 'https://esm.sh/preact/hooks';
+import htm from 'https://esm.sh/htm';
 
 const html = htm.bind(h);
 
 // API URL (replace this with your actual API endpoint)
-const MENU_API_URL = 'https://example.com/api/menu';
+const MENU_API_URL = 'https://main--doceds--d41306677.aem.page/blocks/carousal/carousal.json';
 
 // Define the Header component
 function Header({ title }) {
