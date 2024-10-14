@@ -40,7 +40,7 @@ function Header({ title }) {
   }
 
   return html`
-    <header class="header">
+      <header class="header">
       <div class="header__logo">
         <h1 class="header__title">${title}</h1>
       </div>
@@ -50,6 +50,21 @@ function Header({ title }) {
             (item) => html`
               <li class="header__menu-item">
                 <a href="${item.url}" class="header__menu-link">${item.label}</a>
+                ${item.submenu
+                  ? html`
+                    <ul class="header__submenu">
+                      ${item.submenu.map(
+                        (subItem) => html`
+                          <li class="header__submenu-item">
+                            <a href="${subItem.url}" class="header__submenu-link">
+                              ${subItem.label}
+                            </a>
+                          </li>
+                        `
+                      )}
+                    </ul>
+                  `
+                  : null}
               </li>
             `
           )}
