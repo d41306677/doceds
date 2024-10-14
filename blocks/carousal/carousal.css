@@ -24,6 +24,7 @@
 }
 
 .header__menu-item {
+  position: relative; /* Ensure submenu is positioned relative to the parent */
   margin: 0 10px;
 }
 
@@ -46,18 +47,18 @@
 .header__submenu {
   display: none; /* Hidden by default */
   position: absolute;
-  top: calc(100% - 13px);
+  top: 100%; /* Align directly below the parent item */
   left: 0;
   background-color: #444;
   padding: 10px 0;
   list-style: none;
-  z-index: 100;
-  width: 150px;
+  z-index: 100; /* Ensure submenu is above other elements */
+  width: 150px; /* Set a consistent width */
 }
 
 /* Show submenu when hovered */
 .header__menu-item:hover .header__submenu {
-  display: block;
+  display: block; /* Show submenu on hover */
 }
 
 /* Responsive styles */
@@ -82,4 +83,18 @@
   }
 
   .header__menu-item {
-    margin: 10px 0; /* Adjust margin for stac
+    margin: 10px 0; /* Adjust margin for stacked items */
+    text-align: center; /* Center the text for mobile */
+  }
+
+  .header__submenu {
+    position: relative; /* Change position for mobile */
+    top: 0; /* No top offset for mobile */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width for submenu in mobile */
+  }
+
+  .header__submenu-item {
+    margin: 0; /* No margin for submenu items */
+  }
+}
