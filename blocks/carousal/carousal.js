@@ -33,7 +33,7 @@ function Header({ title }) {
   }
 
   return html`
-    <header class="header">
+     <header class="header">
       <div class="header__logo">
         <h1 class="header__title">${title}</h1>
       </div>
