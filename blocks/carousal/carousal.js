@@ -1,20 +1,13 @@
-import { h, render } from 'https://esm.sh/preact';
-import { useState, useEffect } from 'https://esm.sh/preact/hooks';
-import htm from 'https://esm.sh/htm';
-
-const html = htm.bind(h);
-
-// API URL (replace this with your actual API endpoint)
-const MENU_API_URL = 'https://main--doceds--d41306677.aem.page/blocks/carousal/carousal.json';
-
-// Define the Header component
 function Header({ title }) {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [menuActive, setMenuActive] = useState(false); 
+  const [menuActive, setMenuActive] = useState(false); // State to track menu visibility
 
-  // Fetch the menu from the API
+  const toggleMenu = () => {
+    setMenuActive(!menuActive); // Toggle menu visibility
+  };
+
   useEffect(() => {
     const fetchMenu = async () => {
       try {
@@ -30,12 +23,7 @@ function Header({ title }) {
 
     fetchMenu();
   }, []);
- 
-  const toggleMenu = () => {
-    setMenuActive(!menuActive); // Toggle menu visibility
-  };
 
-  // Render loading, error, or the menu
   if (loading) {
     return html`<div class="header__loading">Loading menu...</div>`;
   }
@@ -45,7 +33,7 @@ function Header({ title }) {
   }
 
   return html`
-      <header class="header">
+    <header class="header">
       <div class="header__logo">
         <h1 class="header__title">${title}</h1>
       </div>
@@ -76,10 +64,4 @@ function Header({ title }) {
       </nav>
     </header>
   `;
-}
-
-// Export and bind to AEM block
-export default async function decorate(block) {
-  const app = html`<${Header} title="MyApp" />`;
-  render(app, block);
 }
