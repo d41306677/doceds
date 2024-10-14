@@ -20,13 +20,58 @@
   list-style-type: none;
   display: flex;
   padding: 0;
+  margin: 0;
 }
 
 .header__menu-item {
   margin: 0 10px;
+  position: relative; /* For positioning the submenu */
 }
 
 .header__menu-link {
   color: white;
   text-decoration: none;
+  padding: 10px;
+  display: block; /* Ensures clickable area spans full height */
+}
+
+/* Submenu styles */
+.header__submenu {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Positioned below the main menu */
+  left: 0;
+  background-color: #444; /* Dark background for submenu */
+  padding: 10px 0;
+  list-style: none;
+  z-index: 100; /* Ensure submenu is above other elements */
+  width: 150px; /* Set a consistent width */
+}
+
+.header__submenu-item {
+  margin: 0;
+}
+
+.header__submenu-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Show the submenu on hover */
+.header__menu-item:hover .header__submenu {
+  display: block;
+}
+
+.header__submenu-link:hover {
+  background-color: #555; /* Lighter color on hover */
+}
+
+/* Main menu hover effect */
+.header__menu-link:hover {
+  text-decoration: underline;
+  background-color: #444; /* Slight background change on hover */
+  border-radius: 5px;
 }
