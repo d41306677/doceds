@@ -12,89 +12,100 @@
   font-size: 1.5rem;
 }
 
-.header__navigation {
+.header__nav {
   position: relative;
 }
 
 .header__menu {
   list-style-type: none;
-  display: flex; /* Default to flex for desktop */
+  display: flex;
   padding: 0;
   margin: 0;
 }
 
 .header__menu-item {
-  position: relative; /* Ensure submenu is positioned relative to the parent */
   margin: 0 10px;
+  position: relative; /* Needed to position the submenu */
 }
 
 .header__menu-link {
   color: white;
   text-decoration: none;
+  padding: 10px;
+  display: block; /* Ensures clickable area spans full height */
 }
 
-/* Hamburger button styling */
-.header__hamburger {
-  display: none; /* Hidden by default */
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* Submenu styling */
+/* Updated Submenu Styles */
 .header__submenu {
   display: none; /* Hidden by default */
   position: absolute;
-  top: 100%; /* Align directly below the parent item */
+  top: calc(100% - 13px); /* Adjusted to remove gap between menu and submenu */
   left: 0;
-  background-color: #444;
+  background-color: #444; /* Dark background for submenu */
   padding: 10px 0;
   list-style: none;
   z-index: 100; /* Ensure submenu is above other elements */
   width: 150px; /* Set a consistent width */
 }
 
-/* Show submenu when hovered */
+/* Show the submenu on hover */
 .header__menu-item:hover .header__submenu {
-  display: block; /* Show submenu on hover */
+  display: block;
+}
+
+/* Submenu item styles */
+.header__submenu-item {
+  margin: 0;
+}
+
+.header__submenu-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Main menu hover effect */
+.header__menu-link:hover {
+  text-decoration: underline;
+  background-color: #444; /* Slight background change on hover */
 }
 
 /* Responsive styles */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
   .header__menu {
-    display: none; /* Hide menu by default on mobile */
-    flex-direction: column; /* Stack items vertically */
-    position: absolute;
-    background-color: #333; /* Same background color */
+    display: none; /* Hide the menu by default */
+    flex-direction: column; /* Stack menu items vertically */
     width: 100%; /* Full width */
-    top: 50px; /* Adjust top position as needed */
-    left: 0;
-    z-index: 1000; /* Ensure it appears above other elements */
-  }
-
-  .header__menu.active {
-    display: flex; /* Show menu when active */
-  }
-
-  .header__hamburger {
-    display: block; /* Show hamburger icon on mobile */
   }
 
   .header__menu-item {
-    margin: 10px 0; /* Adjust margin for stacked items */
-    text-align: center; /* Center the text for mobile */
+    margin: 5px 0; /* Adjust margins for vertical spacing */
   }
 
-  .header__submenu {
-    position: relative; /* Change position for mobile */
-    top: 0; /* No top offset for mobile */
-    left: 0; /* Align to the left */
-    width: 100%; /* Full width for submenu in mobile */
+  .header__menu-link {
+    padding: 15px; /* Increased padding for touch targets */
+    text-align: center; /* Center-align links */
+    width: 100%; /* Full width */
   }
 
-  .header__submenu-item {
-    margin: 0; /* No margin for submenu items */
+  .header__hamburger {
+    display: block; /* Show the hamburger icon */
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem; /* Adjust size */
+  }
+
+  /* Show the menu when hamburger is clicked */
+  .header__menu.active {
+    display: flex; /* Show menu */
   }
 }
