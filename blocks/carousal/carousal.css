@@ -25,7 +25,7 @@
 
 .header__menu-item {
   margin: 0 10px;
-  position: relative; /* For positioning the submenu */
+  position: relative; /* Needed to position the submenu */
 }
 
 .header__menu-link {
@@ -35,7 +35,7 @@
   display: block; /* Ensures clickable area spans full height */
 }
 
-/* Submenu styles */
+/* Updated Submenu Styles */
 .header__submenu {
   display: none; /* Hidden by default */
   position: absolute;
@@ -48,6 +48,12 @@
   width: 150px; /* Set a consistent width */
 }
 
+/* Show the submenu on hover */
+.header__menu-item:hover .header__submenu {
+  display: block;
+}
+
+/* Submenu item styles */
 .header__submenu-item {
   margin: 0;
 }
@@ -60,18 +66,46 @@
   white-space: nowrap; /* Prevent text from wrapping */
 }
 
-/* Show the submenu on hover */
-.header__menu-item:hover .header__submenu {
-  display: block;
-}
-
-.header__submenu-link:hover {
-  background-color: #555; /* Lighter color on hover */
-}
-
 /* Main menu hover effect */
 .header__menu-link:hover {
   text-decoration: underline;
   background-color: #444; /* Slight background change on hover */
-  border-radius: 5px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .header__menu {
+    display: none; /* Hide the menu by default */
+    flex-direction: column; /* Stack menu items vertically */
+    width: 100%; /* Full width */
+  }
+
+  .header__menu-item {
+    margin: 5px 0; /* Adjust margins for vertical spacing */
+  }
+
+  .header__menu-link {
+    padding: 15px; /* Increased padding for touch targets */
+    text-align: center; /* Center-align links */
+    width: 100%; /* Full width */
+  }
+
+  .header__hamburger {
+    display: block; /* Show the hamburger icon */
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem; /* Adjust size */
+  }
+
+  /* Show the menu when hamburger is clicked */
+  .header__menu.active {
+    display: flex; /* Show menu */
+  }
 }
