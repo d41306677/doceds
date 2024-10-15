@@ -50,7 +50,7 @@ function Header({ title }) {
       <div class="header__logo">
         <h1 class="header__title">${title}</h1>
       </div>
-      <button class="header__hamburger" onClick=${toggleMobileMenu}>
+      <button class="header__hamburger" onClick=${toggleMobileMenu} style=${isMobileMenuOpen ? 'display: none;' : ''}>
         ☰ <!-- Hamburger icon -->
       </button>
       <nav class="header__nav">
