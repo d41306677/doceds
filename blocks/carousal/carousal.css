@@ -87,7 +87,7 @@
 }
 
 .header__hamburger {
-  display: block; /* Show the hamburger icon */
+  display: none; /* Hide by default */
   cursor: pointer;
   background: none;
   border: none;
