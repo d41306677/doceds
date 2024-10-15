@@ -85,7 +85,7 @@
 /* Responsive styles */
 @media (max-width: 768px) {
   .header {
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: row; /* Stack elements vertically */
     align-items: flex-start; /* Align items to the start */
   }
 
