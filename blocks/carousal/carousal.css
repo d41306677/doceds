@@ -18,7 +18,7 @@
 
 .header__menu {
   list-style-type: none;
-  display: flex; /* Main menu is horizontal */
+  display: flex;
   padding: 0;
   margin: 0;
 }
@@ -38,7 +38,7 @@
 /* Updated Submenu Styles */
 .header__submenu {
   display: none; /* Hidden by default */
-  position: absolute; /* Position relative to the parent menu item */
+  position: absolute;
   top: calc(100% - 13px); /* Adjusted to remove gap between menu and submenu */
   left: 0;
   background-color: #444; /* Dark background for submenu */
@@ -47,9 +47,9 @@
   z-index: 100; /* Ensure submenu is above other elements */
 }
 
-/* Show the submenu on click */
-.header__menu-item.open .header__submenu {
-  display: block; /* Show submenu */
+/* Show the submenu on hover */
+.header__menu-item:hover .header__submenu {
+  display: block;
 }
 
 /* Submenu item styles */
@@ -116,13 +116,5 @@
   /* Show the header__menu when in mobile view */
   .header__menu.active {
     display: flex; /* Show menu */
-  }
-
-  /* Adjust submenu styles for mobile */
-  .header__submenu {
-    position: static; /* Make submenu position static */
-    width: 100%; /* Full width */
-    display: block; /* Show submenu */
-    margin-top: 0; /* Remove top margin */
   }
 }
