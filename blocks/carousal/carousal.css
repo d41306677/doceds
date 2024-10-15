@@ -72,6 +72,30 @@
   background-color: #444; /* Slight background change on hover */
 }
 
+/* Mobile Menu Styles */
+.mobile-menu {
+  display: none; /* Hidden by default */
+  background-color: #333; /* Match header background */
+  position: absolute; /* Absolute positioning */
+  top: 100%; /* Position below the header */
+  left: 0;
+  width: 100%; /* Full width */
+  z-index: 100; /* Ensure it's above other elements */
+}
+
+.mobile-menu.open {
+  display: block; /* Show when open */
+}
+
+.mobile-menu-button {
+  display: none; /* Hide by default, shown in mobile view */
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem; /* Adjust size */
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .header {
@@ -104,7 +128,17 @@
     font-size: 1.5rem; /* Adjust size */
   }
 
+  /* Show the mobile menu button */
+  .mobile-menu-button {
+    display: block; /* Show the button in mobile view */
+  }
+
   /* Show the menu when hamburger is clicked */
+  .mobile-menu.open {
+    display: flex; /* Show menu */
+  }
+
+  /* Show the header__menu when in mobile view */
   .header__menu.active {
     display: flex; /* Show menu */
   }
