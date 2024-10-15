@@ -71,31 +71,15 @@
   background-color: #444; /* Slight background change on hover */
 }
 
-/* Mobile Menu Styles */
-.mobile-menu {
-  display: none; /* Hidden by default */
-  background-color: #333; /* Match header background */
-  position: absolute; /* Absolute positioning */
-  top: 100%; /* Position below the header */
-  left: 0;
-  width: 100%; /* Full width */
-  z-index: 100; /* Ensure it's above other elements */
-}
-
-.mobile-menu.open {
-  display: block; /* Show when open */
-}
-
+/* Hamburger button styles */
 .header__hamburger {
   display: none; /* Hide by default on larger screens */
   cursor: pointer;
-  background: none;
   border: none; /* Remove border */
   color: white; /* Set color to match header */
   font-size: 1.5rem; /* Adjust size */
+  padding: 0; /* Remove padding to ensure it fits */
   margin-left: auto; /* Align to the right */
-  padding: 0.5em 1.2em; /* Add padding for touch targets */
-  font-family: var(--body-font-family); /* Ensure consistent font */
 }
 
 /* Responsive styles */
@@ -123,6 +107,10 @@
 
   .header__hamburger {
     display: block; /* Show the hamburger icon on mobile */
+    background: none; /* Ensure it has no background */
+    font-size: 24px; /* Increase size for better visibility */
+    margin: 0; /* Remove margin */
+    padding: 5px; /* Add slight padding for better touch target */
   }
 
   /* Show the header__menu when in mobile view */
