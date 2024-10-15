@@ -88,7 +88,11 @@
     flex-direction: row; /* Stack elements vertically */
     align-items: flex-start; /* Align items to the start */
   }
-
+.header__nav {
+    position: absolute;
+    flex-direction: column;
+    background-color: orange;
+}
   .header__menu {
     display: none; /* Hide the menu by default */
     flex-direction: column; /* Stack menu items vertically */
@@ -116,5 +120,6 @@
   /* Show the header__menu when in mobile view */
   .header__menu.active {
     display: flex; /* Show menu */
+      flex-direction: row;
   }
 }
