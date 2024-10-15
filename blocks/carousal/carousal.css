@@ -45,7 +45,6 @@
   padding: 10px 0;
   list-style: none;
   z-index: 100; /* Ensure submenu is above other elements */
-  width: 150px; /* Set a consistent width */
 }
 
 /* Show the submenu on hover */
@@ -87,7 +86,7 @@
   display: block; /* Show when open */
 }
 
-.mobile-menu-button {
+.header__hamburger {
   display: none; /* Hide by default, shown in mobile view */
   cursor: pointer;
   background: none;
@@ -126,16 +125,6 @@
     border: none;
     color: white;
     font-size: 1.5rem; /* Adjust size */
-  }
-
-  /* Show the mobile menu button */
-  .mobile-menu-button {
-    display: block; /* Show the button in mobile view */
-  }
-
-  /* Show the menu when hamburger is clicked */
-  .mobile-menu.open {
-    display: flex; /* Show menu */
   }
 
   /* Show the header__menu when in mobile view */
