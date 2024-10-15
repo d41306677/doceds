@@ -51,7 +51,7 @@ function Header({ title }) {
         <h1 class="header__title">${title}</h1>
       </div>
       <button class="header__hamburger" onClick=${toggleMobileMenu}>
-        &#9776; <!-- Hamburger icon -->
+        ☰ <!-- Hamburger icon -->
       </button>
       <nav class="header__nav">
         <ul class="header__menu ${isMobileMenuOpen ? 'active' : ''}">
