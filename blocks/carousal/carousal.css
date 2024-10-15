@@ -91,7 +91,6 @@
 .header__nav {
     position: absolute;
     flex-direction: column;
-    background-color: orange;
 }
   .header__menu {
     display: none; /* Hide the menu by default */
@@ -121,5 +120,6 @@
   .header__menu.active {
     display: flex; /* Show menu */
       flex-direction: row;
+      background-color: orange;
   }
 }
