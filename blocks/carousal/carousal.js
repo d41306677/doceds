@@ -45,6 +45,13 @@ function Header({ title }) {
     setMobileMenuOpen((prevState) => !prevState);
   };
 
+  // Toggle the submenu for a specific item
+  const toggleSubmenu = (index) => {
+    const newMenuItems = [...menuItems];
+    newMenuItems[index].isOpen = !newMenuItems[index].isOpen; // Toggle the open state
+    setMenuItems(newMenuItems);
+  };
+
   return html`
     <header class="header">
       <div class="header__logo">
@@ -56,9 +63,16 @@ function Header({ title }) {
       <nav class="header__nav">
         <ul class="header__menu ${isMobileMenuOpen ? 'active' : ''}">
           ${menuItems.map(
-            (item) => html`
-              <li class="header__menu-item">
-                <a href="${item.url}" class="header__menu-link">${item.label}</a>
+            (item, index) => html`
+              <li class="header__menu-item ${item.isOpen ? 'open' : ''}">
+                <a href="${item.url}" class="header__menu-link" onClick=${(e) => {
+                  if (item.submenu) {
+                    e.preventDefault(); // Prevent default link behavior if submenu is present
+                    toggleSubmenu(index);
+                  }
+                }}>
+                  ${item.label}
+                </a>
                 ${item.submenu
                   ? html`
                     <ul class="header__submenu">
