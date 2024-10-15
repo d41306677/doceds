@@ -1,6 +1,6 @@
 
 // DynamicCarousel.js
-import { h, render } from 'https://esm.sh/preact';
+import { h, render, Component  } from 'https://esm.sh/preact';
 import htm from 'https://esm.sh/htm';
 
 const html = htm.bind(h);
