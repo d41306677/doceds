@@ -87,13 +87,15 @@
 }
 
 .header__hamburger {
-  display: none; /* Hide by default */
+  display: none; /* Hide by default on larger screens */
   cursor: pointer;
   background: none;
-  border: none;
-  color: white;
+  border: none; /* Remove border */
+  color: white; /* Set color to match header */
   font-size: 1.5rem; /* Adjust size */
-  margin-left: auto; /* Move to the right */
+  margin-left: auto; /* Align to the right */
+  padding: 0.5em 1.2em; /* Add padding for touch targets */
+  font-family: var(--body-font-family); /* Ensure consistent font */
 }
 
 /* Responsive styles */
