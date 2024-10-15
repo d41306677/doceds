@@ -42,7 +42,7 @@ function Header({ title }) {
 
   // Toggle the mobile menu
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
+    setMobileMenuOpen((prevState) => !prevState);
   };
 
   return html`
@@ -50,7 +50,7 @@ function Header({ title }) {
       <div class="header__logo">
         <h1 class="header__title">${title}</h1>
       </div>
-      <button class="header__hamburger" onClick=${toggleMobileMenu} style=${isMobileMenuOpen ? 'display: none;' : ''}>
+      <button class="header__hamburger" onClick=${toggleMobileMenu}>
         ☰ <!-- Hamburger icon -->
       </button>
       <nav class="header__nav">
@@ -79,17 +79,6 @@ function Header({ title }) {
           )}
         </ul>
       </nav>
-      <div class="mobile-menu ${isMobileMenuOpen ? 'open' : ''}">
-        <ul class="header__menu">
-          ${menuItems.map(
-            (item) => html`
-              <li class="header__menu-item">
-                <a href="${item.url}" class="header__menu-link">${item.label}</a>
-              </li>
-            `
-          )}
-        </ul>
-      </div>
     </header>
   `;
 }
