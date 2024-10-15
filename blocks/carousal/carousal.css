@@ -87,12 +87,13 @@
 }
 
 .header__hamburger {
-  display: none; /* Hide by default, shown in mobile view */
+  display: block; /* Show the hamburger icon */
   cursor: pointer;
   background: none;
   border: none;
   color: white;
   font-size: 1.5rem; /* Adjust size */
+  margin-left: auto; /* Move to the right */
 }
 
 /* Responsive styles */
@@ -119,12 +120,7 @@
   }
 
   .header__hamburger {
-    display: block; /* Show the hamburger icon */
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem; /* Adjust size */
+    display: block; /* Show the hamburger icon on mobile */
   }
 
   /* Show the header__menu when in mobile view */
