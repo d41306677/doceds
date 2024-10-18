@@ -1,0 +1,43 @@
+
+    /* Fix the gap by adjusting the position */
+    .submenu {
+        display: none;
+        margin-top: 0;
+        top: 100%;
+    }
+
+    .group:hover .submenu {
+        display: block;
+    }
+    .active-tab {
+        border-bottom: 2px solid #FFD700; /* Active tab indicator */
+    }
+	.hrForTabColumns {
+    background-color: hsla(0, 0%, 100%, .1);
+    height: 1px;
+    margin: 3px 0 0;
+    width: 100%;
+	}
+    /* Only apply scrollable content for mobile devices */
+    .tab-content-mobile {
+        max-height: 300px; /* Adjust this based on your content size */
+        overflow-y: auto;
+    }
+    @media (min-width: 640px) { /* Adjust the min-width as per your design needs */
+        .tab-content-mobile {
+            max-height: none; /* Remove max-height on larger screens */
+            overflow-y: visible; /* Remove overflow on larger screens */
+        }
+    }
+
+    /* Underline for specific sections */
+  
+
+    /* Change link color to #fec221 */
+    ul li a {
+        color: #fec221;
+    }
+
+    ul li a:hover {
+        color: #FFD700; /* Optional: Change color on hover */
+    }
